@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História - Real Clube Atlético</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0b1c3c;
+            --secondary: #ed8c0c;
+            --light: #f8f7f4;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--primary);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(11, 28, 60, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--secondary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-socio {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-select {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: 600;
+        }
+
+        nav {
+            background: var(--primary);
+            padding: 0 5%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+
+        .nav-menu > li > a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .nav-menu > li > a:hover,
+        .nav-menu > li > a.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            min-width: 200px;
+            padding: 0.5rem 0;
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .nav-menu li:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: var(--primary);
+            padding: 0.8rem 1.5rem;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu a.active {
+            background: rgba(237, 140, 12, 0.1);
+            color: var(--secondary);
+            padding-left: 2rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .page-header {
+            margin-top: 140px;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--primary) 0%, #081429 100%);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(248, 247, 244, 0.8);
+        }
+
+        .timeline-section {
+            padding: 5rem 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary), rgba(237, 140, 12, 0.3));
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(237, 140, 12, 0.3);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(237, 140, 12, 0.2);
+            border-color: var(--secondary);
+        }
+
+        .timeline-year {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .timeline-text {
+            line-height: 1.7;
+            color: rgba(248, 247, 244, 0.8);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 5px solid var(--primary);
+            z-index: 10;
+            box-shadow: 0 0 0 5px rgba(237, 140, 12, 0.2);
+        }
+
+        .intro-section {
+            padding: 4rem 5%;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(248, 247, 244, 0.9);
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(237, 140, 12, 0.3);
+        }
+
+        footer {
+            background: linear-gradient(180deg, #081429 0%, #000000 100%);
+            padding: 4rem 5% 2rem;
+            border-top: 3px solid var(--secondary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(248, 247, 244, 0.6);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: var(--secondary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 968px) {
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 140px;
+                left: 0;
+                right: 0;
+                background: rgba(11, 28, 60, 0.98);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(8px, -8px);
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="escudo.png" alt="RCA" class="logo-img">
+                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
+                <select class="lang-select">
+                    <option>PT</option>
+                    <option>EN</option>
+                    <option>ES</option>
+                </select>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
+                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
+                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
+                <li><a href="noticias.html" class="active">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">Nossa História</h1>
+        <p class="page-subtitle">A trajetória de um clube construído com paixão e dedicação</p>
+    </section>
+
+    <section class="intro-section">
+        <div class="intro-text">
+            O Real Clube Atlético nasceu do sonho de jovens apaixonados por esporte que buscavam criar uma instituição que representasse valores de excelência, união e determinação. Desde sua fundação em 2019, o RCA vem construindo uma história marcada por conquistas, desafios superados e um amor incondicional ao esporte.
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2019</div>
+                    <h3 class="timeline-title">Fundação do Clube</h3>
+                    <p class="timeline-text">
+                        Em uma tarde histórica, um grupo de amigos decidiu fundar o Real Clube Atlético. Com o objetivo de promover o esporte e a união através da competição saudável, o clube nasceu com suas cores oficiais: azul marinho, laranja e branco.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2020</div>
+                    <h3 class="timeline-title">Primeira Competição</h3>
+                    <p class="timeline-text">
+                        O RCA participou de sua primeira competição oficial de futsal, mostrando garra e determinação. Mesmo sendo um clube novato, surpreendeu a todos com sua organização e técnica, conquistando o respeito dos adversários.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021</div>
+                    <h3 class="timeline-title">Expansão das Modalidades</h3>
+                    <p class="timeline-text">
+                        O clube expandiu suas atividades, incluindo Fut7 e começando a estruturar equipes de futebol de campo. A torcida "Realeza" cresceu significativamente, tornando-se uma das mais animadas da região.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <h3 class="timeline-title">Primeiros Títulos</h3>
+                    <p class="timeline-text">
+                        Ano de glória! O RCA conquistou seus primeiros títulos importantes, consolidando-se como uma força competitiva. A estrutura profissional implementada começou a dar frutos, com destaque para a base formada.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <h3 class="timeline-title">Era Digital</h3>
+                    <p class="timeline-text">
+                        O clube ingressou no universo dos eSports, criando equipes de eFootball, eFIFA e Rocket League. A modernização também chegou à gestão, com investimentos em tecnologia e análise de desempenho.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h3 class="timeline-title">Consolidação</h3>
+                    <p class="timeline-text">
+                        Com uma diretoria fortalecida e projetos sociais em andamento, o RCA se consolida como referência em gestão esportiva. O programa de sócios "Realeza" alcança números expressivos.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2025</div>
+                    <h3 class="timeline-title">Novos Horizontes</h3>
+                    <p class="timeline-text">
+                        O Real Clube Atlético entra em uma nova fase, com ambições de crescimento nacional. Novos investimentos em infraestrutura e formação de atletas prometem elevar o clube a patamares ainda maiores.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="comeco.html">História</a></li>
+                    <li><a href="diretoria.html">Diretoria</a></li>
+                    <li><a href="simbolos.html">Símbolos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Equipes</h3>
+                <ul>
+                    <li><a href="elenco-futsal.html">Futsal</a></li>
+                    <li><a href="#">Fut7</a></li>
+                    <li><a href="#">Futebol</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="#">Fale Conosco</a></li>
+                    <li><a href="#">Seja Sócio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

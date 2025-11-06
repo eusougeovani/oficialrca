@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Futsal - Real Clube Atlético</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #0b1c3c; --secondary: #ed8c0c; --light: #f8f7f4; }
+        body { font-family: 'Inter', sans-serif; background: var(--primary); color: var(--light); overflow-x: hidden; }
+        
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(11, 28, 60, 0.98); backdrop-filter: blur(10px); border-bottom: 2px solid var(--secondary); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .header-top { display: flex; align-items: center; justify-content: space-between; padding: 1rem 5%; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); }
+        .logo { display: flex; align-items: center; gap: 1rem; }
+        .logo-img { width: 60px; height: 60px; background: white; border-radius: 50%; padding: 5px; }
+        .logo-text { font-size: 1.3rem; font-weight: 800; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .btn-socio { background: white; color: var(--primary); border: none; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
+        .lang-select { padding: 0.5rem 1rem; border-radius: 25px; border: 2px solid white; background: transparent; color: white; font-weight: 600; }
+        
+        nav { background: var(--primary); padding: 0 5%; }
+        .nav-menu { display: flex; list-style: none; justify-content: center; gap: 2rem; padding: 1rem 0; }
+        .nav-menu > li > a { color: var(--light); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.3s; display: block; }
+        .nav-menu > li > a:hover, .nav-menu > li > a.active { background: var(--secondary); color: white; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); min-width: 200px; padding: 0.5rem 0; list-style: none; margin-top: 0.5rem; }
+        .nav-menu li:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { color: var(--primary); padding: 0.8rem 1.5rem; display: block; text-decoration: none; transition: all 0.3s; }
+        .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(237, 140, 12, 0.1); color: var(--secondary); padding-left: 2rem; }
+        
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 30px; height: 3px; background: white; border-radius: 3px; transition: all 0.3s; }
+        
+        .page-header { margin-top: 140px; padding: 4rem 5%; background: linear-gradient(135deg, var(--primary) 0%, #081429 100%); text-align: center; border-bottom: 3px solid var(--secondary); }
+        .page-title { font-size: 3rem; font-weight: 900; color: var(--secondary); margin-bottom: 1rem; text-transform: uppercase; }
+        .page-subtitle { font-size: 1.2rem; color: rgba(248, 247, 244, 0.8); }
+        
+        .elenco-section { padding: 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 2rem; font-weight: 800; color: var(--secondary); margin: 3rem 0 2rem; text-align: center; text-transform: uppercase; }
+        
+        .comissao-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+        
+        .jogadores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .jogador-card { background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); border: 1px solid rgba(237, 140, 12, 0.3); transition: all 0.3s; position: relative; overflow: hidden; }
+        .jogador-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--secondary) 0%, #d67a00 100%); }
+        .jogador-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(237, 140, 12, 0.2); border-color: var(--secondary); }
+        
+        .jogador-numero { position: absolute; top: 1rem; right: 1rem; width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: white; box-shadow: 0 4px 15px rgba(237, 140, 12, 0.4); }
+        
+        .jogador-foto { width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(237, 140, 12, 0.3); }
+        .jogador-foto i { font-size: 3.5rem; color: white; }
+        
+        .jogador-nome { font-size: 1.4rem; font-weight: 700; color: var(--light); margin-bottom: 0.5rem; }
+        .jogador-posicao { color: var(--secondary); font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; }
+        
+        .jogador-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .stat-mini { text-align: center; }
+        .stat-mini-num { font-size: 1.5rem; font-weight: 900; color: var(--secondary); }
+        .stat-mini-label { font-size: 0.85rem; color: rgba(248, 247, 244, 0.7); margin-top: 0.3rem; }
+        
+        .capitao-badge { position: absolute; top: 0.5rem; left: 0.5rem; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.3rem; box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4); }
+        
+        footer { background: linear-gradient(180deg, #081429 0%, #000000 100%); padding: 4rem 5% 2rem; border-top: 3px solid var(--secondary); }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto 3rem; }
+        .footer-section h3 { color: var(--secondary); margin-bottom: 1.5rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.8rem; }
+        .footer-section a { color: var(--light); text-decoration: none; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--secondary); }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(248, 247, 244, 0.6); }
+        
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 55px; height: 55px; background: var(--secondary); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        
+        @media (max-width: 968px) {
+            .nav-menu { display: none; position: fixed; top: 140px; left: 0; right: 0; background: rgba(11, 28, 60, 0.98); flex-direction: column; gap: 0; padding: 1rem 0; }
+            .nav-menu.active { display: flex; }
+            .hamburger { display: flex; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+            .page-title { font-size: 2rem; }
+            .jogadores-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="escudo.png" alt="RCA" class="logo-img">
+                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
+                <select class="lang-select"><option>PT</option><option>EN</option><option>ES</option></select>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
+                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
+                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
+                <li><a href="noticias.html" class="active">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">Elenco Futsal</h1>
+        <p class="page-subtitle">Conheça os atletas que vestem a camisa da Realeza</p>
+    </section>
+
+    <section class="elenco-section">
+        <h2 class="section-title">Goleiros</h2>
+        <div class="jogadores-grid">
+            <div class="jogador-card">
+                <div class="jogador-numero">1</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-hand-paper"></i>
+                </div>
+                <h3 class="jogador-nome">Felipe Rodrigues</h3>
+                <p class="jogador-posicao">Goleiro</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">45</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">78%</div>
+                        <div class="stat-mini-label">Defesas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogador-card">
+                <div class="jogador-numero">12</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-hand-paper"></i>
+                </div>
+                <h3 class="jogador-nome">Matheus Santos</h3>
+                <p class="jogador-posicao">Goleiro</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">28</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">72%</div>
+                        <div class="stat-mini-label">Defesas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Fixos</h2>
+        <div class="jogadores-grid">
+            <div class="jogador-card">
+                <div class="capitao-badge">
+                    <i class="fas fa-star"></i>
+                    CAPITÃO
+                </div>
+                <div class="jogador-numero">4</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="jogador-nome">Bruno Costa</h3>
+                <p class="jogador-posicao">Fixo</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">58</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">145</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogador-card">
+                <div class="jogador-numero">13</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="jogador-nome">Gabriel Ferreira</h3>
+                <p class="jogador-posicao">Fixo</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">32</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">98</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Alas</h2>
+        <div class="jogadores-grid">
+            <div class="jogador-card">
+                <div class="jogador-numero">7</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3 class="jogador-nome">Lucas Martins</h3>
+                <p class="jogador-posicao">Ala</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">72</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">128</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogador-card">
+                <div class="jogador-numero">11</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3 class="jogador-nome">Diego Alves</h3>
+                <p class="jogador-posicao">Ala</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">45</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">67</div>
+                        <div class="stat-mini-label">Assist.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogador-card">
+                <div class="jogador-numero">17</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3 class="jogador-nome">Vitor Hugo</h3>
+                <p class="jogador-posicao">Ala</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">38</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">89</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Pivôs</h2>
+        <div class="jogadores-grid">
+            <div class="jogador-card">
+                <div class="jogador-numero">9</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 class="jogador-nome">Rafael "Gato" Silva</h3>
+                <p class="jogador-posicao">Pivô</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">87</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">152</div>
+                        <div class="stat-mini-label">Jogos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogador-card">
+                <div class="jogador-numero">19</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 class="jogador-nome">Rodrigo Lima</h3>
+                <p class="jogador-posicao">Pivô</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">41</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">52</div>
+                        <div class="stat-mini-label">Assist.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Armador</h2>
+        <div class="jogadores-grid">
+            <div class="jogador-card">
+                <div class="jogador-numero">10</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="jogador-nome">Thiago "Maestro" Souza</h3>
+                <p class="jogador-posicao">Armador</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">43</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">94</div>
+                        <div class="stat-mini-label">Assist.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogador-card">
+                <div class="jogador-numero">8</div>
+                <div class="jogador-foto">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="jogador-nome">André Oliveira</h3>
+                <p class="jogador-posicao">Armador</p>
+                <div class="jogador-stats">
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">28</div>
+                        <div class="stat-mini-label">Gols</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-num">48</div>
+                        <div class="stat-mini-label">Assist.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section"><h3>Clube</h3><ul><li><a href="comeco.html">História</a></li><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></div>
+            <div class="footer-section"><h3>Equipes</h3><ul><li><a href="elenco-futsal.html">Futsal</a></li><li><a href="#">Fut7</a></li><li><a href="#">Futebol</a></li></ul></div>
+            <div class="footer-section"><h3>Contato</h3><ul><li><a href="#">Fale Conosco</a></li><li><a href="#">Seja Sócio</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p></div>
+    </footer>
+
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

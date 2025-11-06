@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas - Real Clube Atlético</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #0b1c3c; --secondary: #ed8c0c; --light: #f8f7f4; }
+        body { font-family: 'Inter', sans-serif; background: var(--primary); color: var(--light); overflow-x: hidden; }
+        
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(11, 28, 60, 0.98); backdrop-filter: blur(10px); border-bottom: 2px solid var(--secondary); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .header-top { display: flex; align-items: center; justify-content: space-between; padding: 1rem 5%; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); }
+        .logo { display: flex; align-items: center; gap: 1rem; }
+        .logo-img { width: 60px; height: 60px; background: white; border-radius: 50%; padding: 5px; }
+        .logo-text { font-size: 1.3rem; font-weight: 800; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .btn-socio { background: white; color: var(--primary); border: none; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
+        .lang-select { padding: 0.5rem 1rem; border-radius: 25px; border: 2px solid white; background: transparent; color: white; font-weight: 600; }
+        
+        nav { background: var(--primary); padding: 0 5%; }
+        .nav-menu { display: flex; list-style: none; justify-content: center; gap: 2rem; padding: 1rem 0; }
+        .nav-menu > li > a { color: var(--light); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.3s; display: block; }
+        .nav-menu > li > a:hover, .nav-menu > li > a.active { background: var(--secondary); color: white; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); min-width: 200px; padding: 0.5rem 0; list-style: none; margin-top: 0.5rem; }
+        .nav-menu li:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { color: var(--primary); padding: 0.8rem 1.5rem; display: block; text-decoration: none; transition: all 0.3s; }
+        .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(237, 140, 12, 0.1); color: var(--secondary); padding-left: 2rem; }
+        
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 30px; height: 3px; background: white; border-radius: 3px; transition: all 0.3s; }
+        
+        .page-header { margin-top: 140px; padding: 4rem 5%; background: linear-gradient(135deg, var(--primary) 0%, #081429 100%); text-align: center; border-bottom: 3px solid var(--secondary); }
+        .page-title { font-size: 3rem; font-weight: 900; color: var(--secondary); margin-bottom: 1rem; text-transform: uppercase; }
+        .page-subtitle { font-size: 1.2rem; color: rgba(248, 247, 244, 0.8); }
+        
+        .stats-section { padding: 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        
+        .stats-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+        .stat-card { background: linear-gradient(135deg, rgba(237, 140, 12, 0.2) 0%, rgba(237, 140, 12, 0.05) 100%); border-radius: 20px; padding: 2rem; text-align: center; border: 2px solid var(--secondary); transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(237, 140, 12, 0.3); }
+        .stat-icon { font-size: 3rem; color: var(--secondary); margin-bottom: 1rem; }
+        .stat-number { font-size: 3.5rem; font-weight: 900; color: var(--secondary); line-height: 1; }
+        .stat-label { font-size: 1.1rem; color: var(--light); margin-top: 0.5rem; font-weight: 600; }
+        
+        .section-title { font-size: 2rem; font-weight: 800; color: var(--secondary); margin: 3rem 0 2rem; text-align: center; text-transform: uppercase; }
+        
+        .artilheiros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .artilheiro-card { background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px); border: 1px solid rgba(237, 140, 12, 0.3); transition: all 0.3s; position: relative; overflow: hidden; }
+        .artilheiro-card::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: var(--secondary); opacity: 0.1; border-radius: 0 0 0 100%; }
+        .artilheiro-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(237, 140, 12, 0.2); border-color: var(--secondary); }
+        
+        .artilheiro-rank { position: absolute; top: 1rem; right: 1rem; width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: white; box-shadow: 0 4px 15px rgba(237, 140, 12, 0.4); }
+        
+        .artilheiro-info { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .artilheiro-foto { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .artilheiro-foto i { font-size: 2.5rem; color: white; }
+        .artilheiro-nome { font-size: 1.5rem; font-weight: 700; color: var(--light); }
+        .artilheiro-posicao { color: rgba(248, 247, 244, 0.7); }
+        
+        .artilheiro-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .mini-stat { text-align: center; }
+        .mini-stat-num { font-size: 1.8rem; font-weight: 900; color: var(--secondary); }
+        .mini-stat-label { font-size: 0.85rem; color: rgba(248, 247, 244, 0.7); }
+        
+        .records-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .record-card { background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px); border: 1px solid rgba(237, 140, 12, 0.3); transition: all 0.3s; }
+        .record-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+        .record-icon { font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem; }
+        .record-title { font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.5rem; }
+        .record-value { font-size: 2rem; font-weight: 900; color: var(--light); margin-bottom: 0.5rem; }
+        .record-desc { color: rgba(248, 247, 244, 0.7); font-size: 0.95rem; }
+        
+        footer { background: linear-gradient(180deg, #081429 0%, #000000 100%); padding: 4rem 5% 2rem; border-top: 3px solid var(--secondary); }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto 3rem; }
+        .footer-section h3 { color: var(--secondary); margin-bottom: 1.5rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.8rem; }
+        .footer-section a { color: var(--light); text-decoration: none; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--secondary); }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(248, 247, 244, 0.6); }
+        
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 55px; height: 55px; background: var(--secondary); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        
+        @media (max-width: 968px) {
+            .nav-menu { display: none; position: fixed; top: 140px; left: 0; right: 0; background: rgba(11, 28, 60, 0.98); flex-direction: column; gap: 0; padding: 1rem 0; }
+            .nav-menu.active { display: flex; }
+            .hamburger { display: flex; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+            .page-title { font-size: 2rem; }
+            .stats-hero { grid-template-columns: repeat(2, 1fr); }
+            .artilheiros-grid, .records-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="escudo.png" alt="RCA" class="logo-img">
+                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
+                <select class="lang-select"><option>PT</option><option>EN</option><option>ES</option></select>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
+                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
+                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
+                <li><a href="noticias.html" class="active">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">Estatísticas</h1>
+        <p class="page-subtitle">Números que contam nossa história</p>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-hero">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-futbol"></i></div>
+                <div class="stat-number">245</div>
+                <div class="stat-label">Jogos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                <div class="stat-number">168</div>
+                <div class="stat-label">Vitórias</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+                <div class="stat-number">587</div>
+                <div class="stat-label">Gols Marcados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="stat-number">68.6%</div>
+                <div class="stat-label">Aproveitamento</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Artilheiros Históricos</h2>
+        <div class="artilheiros-grid">
+            <div class="artilheiro-card">
+                <div class="artilheiro-rank">1º</div>
+                <div class="artilheiro-info">
+                    <div class="artilheiro-foto">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="artilheiro-nome">Rafael "Gato" Silva</div>
+                        <div class="artilheiro-posicao">Pivô</div>
+                    </div>
+                </div>
+                <div class="artilheiro-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">87</div>
+                        <div class="mini-stat-label">Gols</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">152</div>
+                        <div class="mini-stat-label">Jogos</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">0.57</div>
+                        <div class="mini-stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artilheiro-card">
+                <div class="artilheiro-rank">2º</div>
+                <div class="artilheiro-info">
+                    <div class="artilheiro-foto">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="artilheiro-nome">Lucas Martins</div>
+                        <div class="artilheiro-posicao">Ala</div>
+                    </div>
+                </div>
+                <div class="artilheiro-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">72</div>
+                        <div class="mini-stat-label">Gols</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">128</div>
+                        <div class="mini-stat-label">Jogos</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">0.56</div>
+                        <div class="mini-stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artilheiro-card">
+                <div class="artilheiro-rank">3º</div>
+                <div class="artilheiro-info">
+                    <div class="artilheiro-foto">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="artilheiro-nome">Bruno Costa</div>
+                        <div class="artilheiro-posicao">Fixo</div>
+                    </div>
+                </div>
+                <div class="artilheiro-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">58</div>
+                        <div class="mini-stat-label">Gols</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">145</div>
+                        <div class="mini-stat-label">Jogos</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">0.40</div>
+                        <div class="mini-stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Assistentes Históricos</h2>
+        <div class="artilheiros-grid">
+            <div class="artilheiro-card">
+                <div class="artilheiro-rank">1º</div>
+                <div class="artilheiro-info">
+                    <div class="artilheiro-foto">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="artilheiro-nome">Thiago "Maestro" Souza</div>
+                        <div class="artilheiro-posicao">Armador</div>
+                    </div>
+                </div>
+                <div class="artilheiro-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">94</div>
+                        <div class="mini-stat-label">Assistências</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">148</div>
+                        <div class="mini-stat-label">Jogos</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">0.64</div>
+                        <div class="mini-stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artilheiro-card">
+                <div class="artilheiro-rank">2º</div>
+                <div class="artilheiro-info">
+                    <div class="artilheiro-foto">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="artilheiro-nome">Diego Alves</div>
+                        <div class="artilheiro-posicao">Ala</div>
+                    </div>
+                </div>
+                <div class="artilheiro-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">67</div>
+                        <div class="mini-stat-label">Assistências</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">132</div>
+                        <div class="mini-stat-label">Jogos</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">0.51</div>
+                        <div class="mini-stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artilheiro-card">
+                <div class="artilheiro-rank">3º</div>
+                <div class="artilheiro-info">
+                    <div class="artilheiro-foto">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="artilheiro-nome">Rodrigo Lima</div>
+                        <div class="artilheiro-posicao">Pivô</div>
+                    </div>
+                </div>
+                <div class="artilheiro-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">52</div>
+                        <div class="mini-stat-label">Assistências</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">115</div>
+                        <div class="mini-stat-label">Jogos</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-num">0.45</div>
+                        <div class="mini-stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Recordes do Clube</h2>
+        <div class="records-grid">
+            <div class="record-card">
+                <div class="record-icon"><i class="fas fa-fire"></i></div>
+                <div class="record-title">Maior Goleada</div>
+                <div class="record-value">12 x 1</div>
+                <div class="record-desc">vs. Atlético Central - Copa Regional 2023</div>
+            </div>
+
+            <div class="record-card">
+                <div class="record-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="record-title">Sequência Invicta</div>
+                <div class="record-value">18 jogos</div>
+                <div class="record-desc">Campeonato Estadual 2023</div>
+            </div>
+
+            <div class="record-card">
+                <div class="record-icon"><i class="fas fa-star"></i></div>
+                <div class="record-title">Gols em uma Partida</div>
+                <div class="record-value">7 gols</div>
+                <div class="record-desc">Rafael "Gato" Silva - 2024</div>
+            </div>
+
+            <div class="record-card">
+                <div class="record-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="record-title">Defesa Menos Vazada</div>
+                <div class="record-value">8 gols</div>
+                <div class="record-desc">Temporada 2023 - 20 jogos</div>
+            </div>
+
+            <div class="record-card">
+                <div class="record-icon"><i class="fas fa-users"></i></div>
+                <div class="record-title">Maior Público</div>
+                <div class="record-value">2.847</div>
+                <div class="record-desc">Final Campeonato Municipal 2024</div>
+            </div>
+
+            <div class="record-card">
+                <div class="record-icon"><i class="fas fa-medal"></i></div>
+                <div class="record-title">Jogador Mais Títulos</div>
+                <div class="record-value">8 títulos</div>
+                <div class="record-desc">Bruno Costa - Capitão</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section"><h3>Clube</h3><ul><li><a href="comeco.html">História</a></li><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></div>
+            <div class="footer-section"><h3>Equipes</h3><ul><li><a href="elenco-futsal.html">Futsal</a></li><li><a href="#">Fut7</a></li><li><a href="#">Futebol</a></li></ul></div>
+            <div class="footer-section"><h3>Contato</h3><ul><li><a href="#">Fale Conosco</a></li><li><a href="#">Seja Sócio</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p></div>
+    </footer>
+
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

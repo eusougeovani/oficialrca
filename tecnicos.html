@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicos - Real Clube Atlético</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #0b1c3c; --secondary: #ed8c0c; --light: #f8f7f4; }
+        body { font-family: 'Inter', sans-serif; background: var(--primary); color: var(--light); overflow-x: hidden; }
+        
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(11, 28, 60, 0.98); backdrop-filter: blur(10px); border-bottom: 2px solid var(--secondary); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .header-top { display: flex; align-items: center; justify-content: space-between; padding: 1rem 5%; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); }
+        .logo { display: flex; align-items: center; gap: 1rem; }
+        .logo-img { width: 60px; height: 60px; background: white; border-radius: 50%; padding: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .logo-text { font-size: 1.3rem; font-weight: 800; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .btn-socio { background: white; color: var(--primary); border: none; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .lang-select { padding: 0.5rem 1rem; border-radius: 25px; border: 2px solid white; background: transparent; color: white; font-weight: 600; }
+        
+        nav { background: var(--primary); padding: 0 5%; }
+        .nav-menu { display: flex; list-style: none; justify-content: center; gap: 2rem; padding: 1rem 0; }
+        .nav-menu > li > a { color: var(--light); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.3s; display: block; }
+        .nav-menu > li > a:hover, .nav-menu > li > a.active { background: var(--secondary); color: white; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); min-width: 200px; padding: 0.5rem 0; list-style: none; margin-top: 0.5rem; }
+        .nav-menu li:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { color: var(--primary); padding: 0.8rem 1.5rem; display: block; text-decoration: none; transition: all 0.3s; }
+        .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(237, 140, 12, 0.1); color: var(--secondary); padding-left: 2rem; }
+        
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 30px; height: 3px; background: white; border-radius: 3px; transition: all 0.3s; }
+        
+        .page-header { margin-top: 140px; padding: 4rem 5%; background: linear-gradient(135deg, var(--primary) 0%, #081429 100%); text-align: center; border-bottom: 3px solid var(--secondary); }
+        .page-title { font-size: 3rem; font-weight: 900; color: var(--secondary); margin-bottom: 1rem; text-transform: uppercase; }
+        .page-subtitle { font-size: 1.2rem; color: rgba(248, 247, 244, 0.8); }
+        
+        .tecnicos-section { padding: 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 2rem; font-weight: 800; color: var(--secondary); margin: 3rem 0 2rem; text-align: center; text-transform: uppercase; }
+        
+        .tecnico-destaque { background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%); border-radius: 20px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(10px); border: 2px solid var(--secondary); display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+        .tecnico-foto-grande { width: 200px; height: 200px; border-radius: 20px; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(237, 140, 12, 0.4); flex-shrink: 0; }
+        .tecnico-foto-grande i { font-size: 6rem; color: white; }
+        .tecnico-info-destaque { flex: 1; min-width: 300px; }
+        .tecnico-nome-grande { font-size: 2.5rem; font-weight: 900; color: var(--secondary); margin-bottom: 0.5rem; }
+        .tecnico-cargo-grande { font-size: 1.5rem; color: var(--light); margin-bottom: 1rem; }
+        .tecnico-desc { line-height: 1.8; color: rgba(248, 247, 244, 0.9); font-size: 1.1rem; }
+        .tecnico-stats { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 2rem; font-weight: 900; color: var(--secondary); }
+        .stat-label { font-size: 0.9rem; color: rgba(248, 247, 244, 0.7); }
+        
+        .tecnicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .tecnico-card { background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px); border: 1px solid rgba(237, 140, 12, 0.3); transition: all 0.3s; }
+        .tecnico-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(237, 140, 12, 0.2); border-color: var(--secondary); }
+        
+        .tecnico-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .tecnico-foto { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary) 0%, #d67a00 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(237, 140, 12, 0.3); flex-shrink: 0; }
+        .tecnico-foto i { font-size: 2.5rem; color: white; }
+        .tecnico-title-group { flex: 1; }
+        .tecnico-nome { font-size: 1.4rem; font-weight: 700; color: var(--light); margin-bottom: 0.3rem; }
+        .tecnico-cargo { color: var(--secondary); font-weight: 600; }
+        .tecnico-periodo { color: rgba(248, 247, 244, 0.6); font-size: 0.9rem; margin-top: 0.3rem; }
+        
+        .tecnico-conquistas { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .conquista-item { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; color: rgba(248, 247, 244, 0.8); }
+        .conquista-item i { color: var(--secondary); }
+        
+        footer { background: linear-gradient(180deg, #081429 0%, #000000 100%); padding: 4rem 5% 2rem; border-top: 3px solid var(--secondary); }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto 3rem; }
+        .footer-section h3 { color: var(--secondary); margin-bottom: 1.5rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.8rem; }
+        .footer-section a { color: var(--light); text-decoration: none; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--secondary); }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s; }
+        .social-icons a:hover { transform: scale(1.1); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(248, 247, 244, 0.6); }
+        
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 55px; height: 55px; background: var(--secondary); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        
+        @media (max-width: 968px) {
+            .nav-menu { display: none; position: fixed; top: 140px; left: 0; right: 0; background: rgba(11, 28, 60, 0.98); flex-direction: column; gap: 0; padding: 1rem 0; }
+            .nav-menu.active { display: flex; }
+            .hamburger { display: flex; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+            .page-title { font-size: 2rem; }
+            .tecnico-destaque { flex-direction: column; text-align: center; }
+            .tecnico-stats { justify-content: center; }
+            .tecnicos-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="escudo.png" alt="RCA" class="logo-img">
+                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
+                <select class="lang-select"><option>PT</option><option>EN</option><option>ES</option></select>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
+                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
+                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
+                <li><a href="noticias.html" class="active">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">Técnicos</h1>
+        <p class="page-subtitle">Os comandantes que fizeram história no RCA</p>
+    </section>
+
+    <section class="tecnicos-section">
+        <h2 class="section-title">Técnico Atual</h2>
+        <div class="tecnico-destaque">
+            <div class="tecnico-foto-grande">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="tecnico-info-destaque">
+                <h3 class="tecnico-nome-grande">Carlos Mendes</h3>
+                <p class="tecnico-cargo-grande">Técnico Principal - Futsal</p>
+                <p class="tecnico-desc">
+                    Com vasta experiência no futsal brasileiro, Carlos Mendes assumiu o comando técnico do RCA em 2023 e já conquistou 3 títulos importantes. Sua filosofia de jogo baseada em posse de bola e pressão alta revolucionou o estilo da equipe.
+                </p>
+                <div class="tecnico-stats">
+                    <div class="stat">
+                        <div class="stat-num">87%</div>
+                        <div class="stat-label">Aproveitamento</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">45</div>
+                        <div class="stat-label">Jogos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">3</div>
+                        <div class="stat-label">Títulos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Comissão Técnica Atual</h2>
+        <div class="tecnicos-grid">
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-clipboard"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">Roberto Silva</h3>
+                        <p class="tecnico-cargo">Auxiliar Técnico</p>
+                        <p class="tecnico-periodo">Desde 2023</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Responsável por análise tática e preparação de jogadas específicas. Trabalha diretamente com o elenco no aprimoramento técnico.</p>
+            </div>
+
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">Fernando Costa</h3>
+                        <p class="tecnico-cargo">Preparador Físico</p>
+                        <p class="tecnico-periodo">Desde 2022</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Especialista em fisiologia do esporte, implementou programa de treinamento que reduziu lesões em 60%.</p>
+            </div>
+
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">André Oliveira</h3>
+                        <p class="tecnico-cargo">Treinador de Goleiros</p>
+                        <p class="tecnico-periodo">Desde 2023</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Ex-goleiro profissional, trouxe metodologia moderna para preparação dos goleiros do clube.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Técnicos Históricos</h2>
+        <div class="tecnicos-grid">
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">Paulo Santos</h3>
+                        <p class="tecnico-cargo">Primeiro Técnico</p>
+                        <p class="tecnico-periodo">2019 - 2021</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Fundador e primeiro técnico do RCA. Responsável por estruturar a base tática do clube.</p>
+                <div class="tecnico-conquistas">
+                    <div class="conquista-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Montou o elenco inicial</span>
+                    </div>
+                    <div class="conquista-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Primeira participação oficial</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">Márcio Ferreira</h3>
+                        <p class="tecnico-cargo">Técnico</p>
+                        <p class="tecnico-periodo">2021 - 2023</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Levou o RCA aos primeiros títulos e consolidou o clube como força competitiva.</p>
+                <div class="tecnico-conquistas">
+                    <div class="conquista-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Campeonato Municipal 2022</span>
+                    </div>
+                    <div class="conquista-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Liga Regional 2022</span>
+                    </div>
+                    <div class="conquista-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>82% de aproveitamento</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">José Almeida</h3>
+                        <p class="tecnico-cargo">Técnico Fut7</p>
+                        <p class="tecnico-periodo">2022 - Atual</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Especialista em Fut7, lidera a equipe com excelente campanha na modalidade.</p>
+                <div class="tecnico-conquistas">
+                    <div class="conquista-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Copa da Amizade 2023</span>
+                    </div>
+                    <div class="conquista-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Campeonato Regional 2024</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tecnico-card">
+                <div class="tecnico-header">
+                    <div class="tecnico-foto">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="tecnico-title-group">
+                        <h3 class="tecnico-nome">Ricardo Lima</h3>
+                        <p class="tecnico-cargo">Técnico Futebol</p>
+                        <p class="tecnico-periodo">2023 - Atual</p>
+                    </div>
+                </div>
+                <p class="tecnico-desc">Comandante da equipe de futebol de campo, implementou sistema tático moderno.</p>
+                <div class="tecnico-conquistas">
+                    <div class="conquista-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Torneio de Integração 2023</span>
+                    </div>
+                    <div class="conquista-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Copa Regional 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section"><h3>Clube</h3><ul><li><a href="comeco.html">História</a></li><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></div>
+            <div class="footer-section"><h3>Equipes</h3><ul><li><a href="elenco-futsal.html">Futsal</a></li><li><a href="#">Fut7</a></li><li><a href="#">Futebol</a></li></ul></div>
+            <div class="footer-section"><h3>Contato</h3><ul><li><a href="#">Fale Conosco</a></li><li><a href="#">Seja Sócio</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p></div>
+    </footer>
+
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

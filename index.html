@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Clube Atlético - @oficialrca</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="escudo.png" alt="RCA" class="logo-img">
+                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
+                <select class="lang-select" aria-label="Idioma">
+                    <option>PT</option>
+                    <option>EN</option>
+                    <option>ES</option>
+                </select>
+                <div class="hamburger" aria-label="Menu" role="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
+                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
+                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
+                <li><a href="noticias.html" class="active">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline>
+            <source src="video-inicial.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>BEM-VINDO À REALEZA</h1>
+                <p>Paixão, Tradição e Glória</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="proximos-jogos">
+        <h2 class="section-title">Próximos Jogos</h2>
+        <div class="jogos-grid">
+            <div class="jogo-card">
+                <div class="jogo-info">
+                    <div class="jogo-data">Sábado, 15 de Novembro - 19h</div>
+                    <div class="jogo-campeonato">Campeonato Estadual</div>
+                </div>
+                <div class="jogo-times">
+                    <div class="time">
+                        <div class="time-escudo">
+                            <img src="escudo.png" alt="RCA" style="width: 60px;">
+                        </div>
+                        <div class="time-nome">RCA</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="time">
+                        <div class="time-escudo">
+                            <i class="fas fa-shield-alt" style="font-size: 40px; color: #0b1c3c;"></i>
+                        </div>
+                        <div class="time-nome">Adversário</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogo-card">
+                <div class="jogo-info">
+                    <div class="jogo-data">Domingo, 23 de Novembro - 16h</div>
+                    <div class="jogo-campeonato">Copa Regional</div>
+                </div>
+                <div class="jogo-times">
+                    <div class="time">
+                        <div class="time-escudo">
+                            <i class="fas fa-shield-alt" style="font-size: 40px; color: #0b1c3c;"></i>
+                        </div>
+                        <div class="time-nome">Adversário</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="time">
+                        <div class="time-escudo">
+                            <img src="escudo.png" alt="RCA" style="width: 60px;">
+                        </div>
+                        <div class="time-nome">RCA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="noticias">
+        <h2 class="section-title">Últimas Notícias</h2>
+        <div class="noticias-grid">
+            <article class="noticia-card">
+                <img src="n1.heic" alt="Notícia 1" class="noticia-img">
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Elenco se prepara para próximo desafio</h3>
+                    <p class="noticia-texto">Time realiza treino intensivo focado em estratégias para o confronto do final de semana.</p>
+                </div>
+            </article>
+
+            <article class="noticia-card">
+                <img src="noticia2.jpg" alt="Notícia 2" class="noticia-img">
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Novos talentos chegam ao clube</h3>
+                    <p class="noticia-texto">RCA anuncia contratação de atletas promissores para fortalecer o elenco.</p>
+                </div>
+            </article>
+
+            <article class="noticia-card">
+                <img src="noticia3.jpg" alt="Notícia 3" class="noticia-img">
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Diretoria planeja expansão</h3>
+                    <p class="noticia-texto">Clube investe em infraestrutura e busca novos patrocinadores.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="#">História</a></li>
+                    <li><a href="#">Diretoria</a></li>
+                    <li><a href="#">Símbolos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Equipes</h3>
+                <ul>
+                    <li><a href="#">Futsal</a></li>
+                    <li><a href="#">Fut7</a></li>
+                    <li><a href="#">Futebol</a></li>
+                    <li><a href="#">eSports</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="#">Fale Conosco</a></li>
+                    <li><a href="#">Seja Sócio</a></li>
+                    <li><a href="#">Imprensa</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="script.js"></script>
+</body>
+</html>
