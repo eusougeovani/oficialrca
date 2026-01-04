@@ -1,0 +1,15 @@
+{
+  "name": "Real Clube Atlético",
+  "short_name": "RCA | @oficialrca",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f1c2e",
+  "theme_color": "#0f1c2e",
+  "icons": [
+    {
+      "src": "escudo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -2,113 +2,835 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0f1c2e">
     <title>Real Clube Atlético - @oficialrca</title>
+    <link rel="icon" href="escudo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="marca.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #0f1c2e;
+            --branco: #fdfdfd;
+            --dourado: #ff6b00;
+            --cinza: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--azul);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: var(--dourado);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--branco);
+            margin: 0 8px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--azul);
+        }
+
+        .logo-text {
+            color: var(--branco);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        .btn-socio {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-socio:hover {
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--branco);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            margin-top: 120px;
+            position: relative;
+            height: 600px;
+            background: linear-gradient(135deg, var(--azul) 0%, #1a2b3f 100%);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,107,0,0.1)"/></svg>');
+            background-size: 300px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            padding: 0 5%;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--branco);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: rgba(253,253,253,0.8);
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--dourado);
+            color: var(--branco);
+        }
+
+        .btn-primary a {
+            color: var(--branco);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--branco);
+            border: 2px solid var(--branco);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,0,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--branco);
+            color: var(--azul);
+        }
+
+        /* PRÓXIMOS JOGOS */
+        .proximos-jogos {
+            padding: 80px 5%;
+            background: var(--cinza);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--azul);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--dourado);
+        }
+
+        .jogo-card {
+            background: var(--branco);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .jogo-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .jogo-campeonato {
+            color: var(--dourado);
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .jogo-data {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .jogo-times {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .time {
+            text-align: center;
+            flex: 1;
+        }
+
+        .time-escudo {
+            width: 100px;
+            height: 100px;
+            background: var(--cinza);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--azul);
+            border: 3px solid var(--dourado);
+        }
+
+        .time-nome {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--azul);
+        }
+
+        .vs {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--dourado);
+        }
+
+        /* ESTATÍSTICAS */
+        .stats-section {
+            padding: 80px 5%;
+            background: var(--azul);
+            color: var(--branco);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--dourado);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(253,253,253,0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* NOTÍCIAS */
+        .noticias-section {
+            padding: 80px 5%;
+            background: var(--branco);
+        }
+
+        .noticias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .noticia-card {
+            background: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .noticia-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .noticia-img {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--azul) 0%, var(--dourado) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 60px;
+        }
+
+        .noticia-content {
+            padding: 25px;
+        }
+
+        .noticia-categoria {
+            color: var(--dourado);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .noticia-titulo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .noticia-texto {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .noticia-link {
+            color: var(--dourado);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* HISTÓRIA */
+        .historia-section {
+            padding: 80px 5%;
+            background: var(--cinza);
+        }
+
+        .historia-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .historia-text h2 {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--azul);
+            margin-bottom: 20px;
+        }
+
+        .historia-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .historia-img {
+            width: 100%;
+            height: 400px;
+            background: var(--azul);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 100px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--dourado);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(253,253,253,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(253,253,253,0.1);
+            color: rgba(253,253,253,0.6);
+        }
+        
+        .footer-bottom a { 
+            color: var(--dourado); 
+            text-decoration: none;
+            word-wrap: break-word;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 968px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul);
+                padding: 20px;
+            }
+
+            nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero {
+                height: auto;
+                padding: 60px 5%;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .historia-content {
+                grid-template-columns: 1fr;
+            }
+
+            .historia-text h2 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .jogo-times {
+                flex-direction: column;
+            }
+
+            .vs {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .jogo-card {
+                padding: 25px;
+            }
+
+            .time-escudo {
+                width: 70px;
+                height: 70px;
+                font-size: 30px;
+            }
+
+            .stat-number {
+                font-size: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <div class="logo">
-                <img src="escudo.png" alt="RCA" class="logo-img">
-                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+        <div class="top-bar">
+            <div class="social-links">
+                <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
             </div>
-            <div class="header-actions">
-                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
-                <div class="hamburger" aria-label="Menu" role="button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+            <div style="color: var(--branco); font-size: 12px; font-weight: 600;">
+                <i class="fas fa-phone"></i> CONTATO: (79) 9 8866-3905
             </div>
         </div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Início</a></li>
-                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
-                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
-                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
-                <li><a href="noticias.html">Notícias</a></li>
-            </ul>
-        </nav>
+        <div class="main-header">
+            <div class="logo-container">
+                <div class="logo-img"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="logo-text">REAL CLUBE ATLÉTICO</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#clube">Clube</a></li>
+                    <li><a href="#jogos">Jogos</a></li>
+                    <li><a href="#noticias">Notícias</a></li>
+                    <li><a href="#historia">História</a></li>
+                </ul>
+            </nav>
+            <button class="btn-socio">SEJA RCA</button>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
     </header>
 
-    <section class="hero">
-        <video autoplay muted loop playsinline>
-            <source src="video-inicial.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <h1>BEM-VINDO À REALEZA</h1>
-                <p>Respeito, Comunhão e Ambição</p>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">⚽ TEMPORADA 2026</div>
+            <h1>BEM-VINDO À REALEZA</h1>
+            <p>Respeito, Comunhão e Ambição. Juntos fazemos história no futsal e futebol sergipano.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">CONHEÇA O CLUBE</button>
+                <a href="#jogos" class="btn-secondary">PRÓXIMOS JOGOS</a>
             </div>
         </div>
     </section>
 
-    <section class="proximos-jogos">
-        <h2 class="section-title">Próximos Jogos</h2>
-        <div class="jogos-grid">
-            <div class="jogo-card">
-                <div class="jogo-info">
-                    <div class="jogo-data">Sábado, 15 de Novembro - 19h</div>
-                    <div class="jogo-campeonato">Sergipano de Futsal</div>
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">85</div>
+                <div class="stat-label">Jogos Disputados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">33</div>
+                <div class="stat-label">Vitórias</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">190</div>
+                <div class="stat-label">Gols Marcados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Títulos</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="proximos-jogos" id="jogos">
+        <div class="section-header">
+            <h2 class="section-title">PRÓXIMOS JOGOS</h2>
+        </div>
+        <div class="jogo-card">
+            <div class="jogo-info">
+                <div class="jogo-campeonato">?</div>
+                <div class="jogo-data">?, ? de ? - ?h</div>
+            </div>
+            <div class="jogo-times">
+                <div class="time">
+                    <div class="time-escudo">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="time-nome">?</div>
                 </div>
-                <div class="jogo-times">
-                    <div class="time">
-                        <div class="time-escudo">
-                            <img src="escudo.png" alt="RCA" style="width: 60px;">
-                        </div>
-                        <div class="time-nome">RCA</div>
+                <div class="vs">VS</div>
+                <div class="time">
+                    <div class="time-escudo">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="vs">VS</div>
-                    <div class="time">
-                        <div class="time-escudo">
-                            <img src="escudo.png" alt="Adversário" style="width: 60px;">
-                        </div>
-                        <div class="time-nome">Adversário</div>
-                    </div>
+                    <div class="time-nome">?</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="noticias">
-        <h2 class="section-title">Últimas Notícias</h2>
+    <section class="noticias-section" id="noticias">
+        <div class="section-header">
+            <h2 class="section-title">ÚLTIMAS NOTÍCIAS</h2>
+        </div>
         <div class="noticias-grid">
-            <article class="noticia-card">
-                <img src="n1.heic" alt="Notícia 1" class="noticia-img">
-                <div class="noticia-content">
-                    <h3 class="noticia-titulo">O sonho tem que continuar</h3>
-                    <p class="noticia-texto">Planejamento para retorno em 2026 começou.</p>
+            <div class="noticia-card">
+                <div class="noticia-img">
+                    <img src="news001.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-            </article>
+                <div class="noticia-content">
+                    <div class="noticia-categoria">DESTAQUE</div>
+                    <h3 class="noticia-titulo">RCA conquista título inédito na Taça Redegol Sub-16 e carimba vaga no Brasileiro</h3>
+                    <p class="noticia-texto">Time estreante domina competição em Aracaju e fatura primeiro troféu com campanha impecável</p>
+                    <a href="news001.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="historia-section" id="historia">
+        <div class="historia-content">
+            <div class="historia-text">
+                <h2>NOSSA HISTÓRIA</h2>
+                <p>Fundado em 2019, o Real Clube Atlético nasceu do sonho de jovens apaixonados por esporte que buscavam criar uma instituição que representasse valores de excelência, união e determinação.</p>
+                <p>Com um título conquistado e diversas campanhas memoráveis, o RCA se consolidou como uma força no futsal e futebol 7 de Sergipe.</p>
+                <button class="btn-primary" style="margin-top: 20px;"><a href="historia.html">CONHEÇA MAIS</a></button>
+            </div>
+            <div class="historia-img">
+                <img src="historia.png" alt="História RCA" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <div class="logo-img" style="margin-bottom: 20px; width: 70px; height: 70px; font-size: 24px;"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
                 <h3>REAL CLUBE ATLÉTICO</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="footer-section"><h3>Clube</h3><ul><li><a href="comeco.html">História</a></li><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></div>
-            <div class="footer-section"><h3>Equipes</h3><ul><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></div>
-            <div class="footer-section"><h3>Contato</h3><ul><li><a href="#">Fale Conosco</a></li><li><a href="#">Seja Sócio</a></li></ul></div>
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="historia.html">História</a></li>
+                    <li><a href="#">Diretoria</a></li>
+                    <li><a href="#">Símbolos</a></li>
+                    <li><a href="#">Títulos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Equipes</h3>
+                <ul>
+                    <li><a href="#">Futsal</a></li>
+                    <li><a href="#">Fut7</a></li>
+                    <li><a href="#">Feminino</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="#">Fale Conosco</a></li>
+                    <li><a href="#">Seja Sócio</a></li>
+                    <li><a href="#">Imprensa</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.
+            </p>
+            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a
+                    href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
+        </div>
     </footer>
 
-    <button class="back-to-top" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <script src="main.js"></script>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animações ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.noticia-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
