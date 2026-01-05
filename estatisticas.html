@@ -2,46 +2,646 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0f1c2e">
     <title>Estatísticas - Real Clube Atlético</title>
+    <link rel="icon" href="escudo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="marca.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #0f1c2e;
+            --branco: #fdfdfd;
+            --dourado: #ff6b00;
+            --cinza: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--azul);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: var(--dourado);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--branco);
+            margin: 0 8px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--azul);
+        }
+
+        .logo-text {
+            color: var(--branco);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        .btn-socio {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-socio:hover {
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--branco);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .estatisticas-hero {
+            margin-top: 120px;
+            background: linear-gradient(135deg, var(--azul) 0%, #1a2b3f 100%);
+            padding: 80px 5%;
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .estatisticas-hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .estatisticas-hero p {
+            font-size: 24px;
+            color: rgba(253,253,253,0.8);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* STATS CARDS */
+        .stats-hero {
+            padding: 80px 5%;
+            background: var(--cinza);
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--branco);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            color: var(--dourado);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--azul);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* TABELAS */
+        .tabelas-section {
+            padding: 80px 5%;
+            background: var(--branco);
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--azul);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--dourado);
+        }
+
+        .tabela-container {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            background: var(--branco);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .tabela-header {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tabela-titulo {
+            font-size: 28px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tabela-titulo i {
+            color: var(--dourado);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            gap: 10px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: var(--branco);
+            outline: none;
+            width: 200px;
+            font-size: 14px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .search-box i {
+            color: rgba(255,255,255,0.6);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--cinza);
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--azul);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+        }
+
+        th:hover {
+            background: #e8e8e8;
+        }
+
+        th i {
+            margin-left: 5px;
+            font-size: 10px;
+            color: var(--dourado);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--cinza);
+            transition: background 0.3s;
+        }
+
+        tbody tr:hover {
+            background: var(--cinza);
+        }
+
+        td {
+            padding: 20px;
+            color: #666;
+        }
+
+        .rank-cell {
+            font-weight: 900;
+            color: var(--azul);
+            font-size: 18px;
+        }
+
+        .player-cell {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--azul);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 20px;
+        }
+
+        .player-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .player-name {
+            font-weight: 700;
+            color: var(--azul);
+            font-size: 16px;
+        }
+
+        .player-position {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .highlight-cell {
+            font-weight: 900;
+            color: var(--dourado);
+            font-size: 20px;
+        }
+
+        .top-3 .rank-cell {
+            background: linear-gradient(135deg, var(--dourado) 0%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* RECORDES */
+        .recordes-section {
+            padding: 80px 5%;
+            background: var(--cinza);
+        }
+
+        .recordes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .recorde-card {
+            background: var(--branco);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .recorde-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .recorde-icon {
+            font-size: 48px;
+            color: var(--dourado);
+            margin-bottom: 20px;
+        }
+
+        .recorde-titulo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .recorde-valor {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--dourado);
+            margin-bottom: 10px;
+        }
+
+        .recorde-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--dourado);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(253,253,253,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(253,253,253,0.1);
+            color: rgba(253,253,253,0.6);
+        }
+
+        .footer-bottom a {
+            color: var(--dourado);
+            text-decoration: none;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 968px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul);
+                padding: 20px;
+            }
+
+            nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .estatisticas-hero h1 {
+                font-size: 36px;
+            }
+
+            .estatisticas-hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .tabela-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+
+            .player-cell {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .estatisticas-hero h1 {
+                font-size: 28px;
+            }
+
+            .estatisticas-hero p {
+                font-size: 16px;
+            }
+
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tabela-titulo {
+                font-size: 20px;
+            }
+
+            th, td {
+                padding: 10px 5px;
+                font-size: 12px;
+            }
+
+            .player-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .player-name {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <div class="logo">
-                <img src="escudo.png" alt="RCA" class="logo-img">
-                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+        <div class="top-bar">
+            <div class="social-links">
+                <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
             </div>
-            <div class="header-actions">
-                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
-                <div class="hamburger"><span></span><span></span><span></span></div>
+            <div style="color: var(--branco); font-size: 12px; font-weight: 600;">
+                <i class="fas fa-phone"></i> CONTATO: (79) 9 8866-3905
             </div>
         </div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
-                <li><a href="#" class="active">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html" class="active">Estatísticas</a></li></ul></li>
-                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
-                <li><a href="noticias.html">Notícias</a></li>
-            </ul>
-        </nav>
+        <div class="main-header">
+            <div class="logo-container" onclick="window.location.href='index.html'">
+                <div class="logo-img"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="logo-text">REAL CLUBE ATLÉTICO</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="clube.html">Clube</a></li>
+                    <li><a href="estatisticas.html">Estatísticas</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                    <li><a href="historia.html">História</a></li>
+                </ul>
+            </nav>
+            <button class="btn-socio">SEJA RCA</button>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
     </header>
 
-    <section class="page-header">
-        <h1 class="page-title">Estatísticas</h1>
-        <p class="page-subtitle">Números que contam nossa história</p>
+    <section class="estatisticas-hero">
+        <h1>ESTATÍSTICAS DO RCA</h1>
+        <p>Números que contam nossa história de conquistas e superação</p>
     </section>
 
-    <section class="stats-section">
-        <div class="stats-hero">
+    <section class="stats-hero">
+        <div class="stats-cards">
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-futbol"></i></div>
                 <div class="stat-number">85</div>
-                <div class="stat-label">Jogos</div>
+                <div class="stat-label">Jogos Disputados</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-trophy"></i></div>
@@ -59,210 +659,469 @@
                 <div class="stat-label">Aproveitamento</div>
             </div>
         </div>
+    </section>
 
-        <h2 class="section-title">Artilheiros Históricos</h2>
-        <div class="artilheiros-grid">
-            <div class="artilheiro-card">
-                <div class="artilheiro-rank">1º</div>
-                <div class="artilheiro-info">
-                    <div class="artilheiro-foto">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="artilheiro-nome">Joaquim Santos</div>
-                        <div class="artilheiro-posicao">Armador</div>
-                    </div>
+    <section class="tabelas-section">
+        <h2 class="section-title">RANKING DE JOGADORES</h2>
+
+        <!-- TABELA DE MAIS JOGOS -->
+        <div class="tabela-container">
+            <div class="tabela-header">
+                <div class="tabela-titulo">
+                    <i class="fas fa-calendar-check"></i>
+                    ESTATÍSTICAS DOS JOGADORES
                 </div>
-                <div class="artilheiro-stats">
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">26</div>
-                        <div class="mini-stat-label">Gols</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">49</div>
-                        <div class="mini-stat-label">Jogos</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">0.53</div>
-                        <div class="mini-stat-label">Média</div>
-                    </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar jogador..." id="searchJogos">
                 </div>
             </div>
-
-            <div class="artilheiro-card">
-                <div class="artilheiro-rank">2º</div>
-                <div class="artilheiro-info">
-                    <div class="artilheiro-foto">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="artilheiro-nome">Robertinho</div>
-                        <div class="artilheiro-posicao">Armador</div>
-                    </div>
-                </div>
-                <div class="artilheiro-stats">
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">12</div>
-                        <div class="mini-stat-label">Gols</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">34</div>
-                        <div class="mini-stat-label">Jogos</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">0.35</div>
-                        <div class="mini-stat-label">Média</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="artilheiro-card">
-                <div class="artilheiro-rank">3º</div>
-                <div class="artilheiro-info">
-                    <div class="artilheiro-foto">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="artilheiro-nome">Ian Bessa</div>
-                        <div class="artilheiro-posicao">Pivô</div>
-                    </div>
-                </div>
-                <div class="artilheiro-stats">
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">10</div>
-                        <div class="mini-stat-label">Gols</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">16</div>
-                        <div class="mini-stat-label">Jogos</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">0.62</div>
-                        <div class="mini-stat-label">Média</div>
-                    </div>
-                </div>
-            </div>
+            <table id="tabelaJogos">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable('tabelaJogos', 0)">#</th>
+                        <th onclick="sortTable('tabelaJogos', 1)">JOGADOR <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('tabelaJogos', 2)">JOGOS <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('tabelaJogos', 3)">GOLS <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('tabelaJogos', 4)">ASSIST. <i class="fas fa-sort"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="top-3">
+                        <td class="rank-cell">1</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Joaquim</span>
+                                    <span class="player-position">Armador</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">49</td>
+                        <td>25</td>
+                        <td>12</td>
+                    </tr>
+                    <tr class="top-3">
+                        <td class="rank-cell">2</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">João Lucas</span>
+                                    <span class="player-position">Fixo</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">38</td>
+                        <td>6</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="top-3">
+                        <td class="rank-cell">3</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Robertinho</span>
+                                    <span class="player-position">Ala</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">34</td>
+                        <td>13</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">4</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Juninho</span>
+                                    <span class="player-position">Ala/Fixo</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">31</td>
+                        <td>2</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">5</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Rafael Aguiar</span>
+                                    <span class="player-position">Ala/Fixo</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">24</td>
+                        <td>8</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">6</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Smith</span>
+                                    <span class="player-position">Fixo</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">24</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">7</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Paulino</span>
+                                    <span class="player-position">Fixo</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">20</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">8</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Falcone</span>
+                                    <span class="player-position">Armador</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">19</td>
+                        <td>7</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">9</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Cristian</span>
+                                    <span class="player-position">Goleiro</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">18</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">10</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Bernardo</span>
+                                    <span class="player-position">Ala</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">17</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <h2 class="section-title">Assistentes Históricos</h2>
-        <div class="artilheiros-grid">
-            <div class="artilheiro-card">
-                <div class="artilheiro-rank">1º</div>
-                <div class="artilheiro-info">
-                    <div class="artilheiro-foto">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="artilheiro-nome">Joaquim Santos</div>
-                        <div class="artilheiro-posicao">Armador</div>
-                    </div>
+        <!-- TABELA DE CAMPEONATOS -->
+        <div class="tabela-container">
+            <div class="tabela-header">
+                <div class="tabela-titulo">
+                    <i class="fas fa-hands-helping"></i>
+                    ESTATÍSTICAS DOS CAMPEONATOS
                 </div>
-                <div class="artilheiro-stats">
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">12</div>
-                        <div class="mini-stat-label">Assistências</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">49</div>
-                        <div class="mini-stat-label">Jogos</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">0.24</div>
-                        <div class="mini-stat-label">Média</div>
-                    </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar competição..." id="searchAssist">
                 </div>
             </div>
-
-            <div class="artilheiro-card">
-                <div class="artilheiro-rank">2º</div>
-                <div class="artilheiro-info">
-                    <div class="artilheiro-foto">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="artilheiro-nome">Rafael Aguiar</div>
-                        <div class="artilheiro-posicao">Ala</div>
-                    </div>
-                </div>
-                <div class="artilheiro-stats">
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">6</div>
-                        <div class="mini-stat-label">Assistências</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">24</div>
-                        <div class="mini-stat-label">Jogos</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">0.25</div>
-                        <div class="mini-stat-label">Média</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="artilheiro-card">
-                <div class="artilheiro-rank">3º</div>
-                <div class="artilheiro-info">
-                    <div class="artilheiro-foto">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="artilheiro-nome">Gabriel Costa</div>
-                        <div class="artilheiro-posicao">Pivô</div>
-                    </div>
-                </div>
-                <div class="artilheiro-stats">
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">4</div>
-                        <div class="mini-stat-label">Assistências</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">7</div>
-                        <div class="mini-stat-label">Jogos</div>
-                    </div>
-                    <div class="mini-stat">
-                        <div class="mini-stat-num">0.57</div>
-                        <div class="mini-stat-label">Média</div>
-                    </div>
-                </div>
-            </div>
+            <table id="tabelaAssist">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable('tabelaAssist', 0)">#</th>
+                        <th onclick="sortTable('tabelaAssist', 1)">COMPETIÇÃO <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('tabelaAssist', 2)">JOGOS <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('tabelaAssist', 3)">VITÓRIAS <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('tabelaAssist', 4)">TÍTULOS <i class="fas fa-sort"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="top-3">
+                        <td class="rank-cell">1</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Sergipano Futsal S17</span>
+                                    <span class="player-position">FSFS</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">14</td>
+                        <td>6</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="top-3">
+                        <td class="rank-cell">2</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Taça Redegol Fut7 S16</span>
+                                    <span class="player-position">REDEGOL</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">9</td>
+                        <td>5</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="top-3">
+                        <td class="rank-cell">3</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Sergipano Futsal S16</span>
+                                    <span class="player-position">FSFS</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">9</td>
+                        <td>3</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">4</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Botelho Cup Fut7 Adulto</span>
+                                    <span class="player-position">BSP</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">8</td>
+                        <td>5</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">5</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Sergipano Fut7 S17</span>
+                                    <span class="player-position">FSEFUT7</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">6</td>
+                        <td>3</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">6</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Sergipano Fut7 S20</span>
+                                    <span class="player-position">Federação das Escolinhas</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">6</td>
+                        <td>2</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">7</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Sergipano Fut7 S19</span>
+                                    <span class="player-position">FSFS</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">6</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">8</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Aracaju Cup Fut7 S20</span>
+                                    <span class="player-position">Federação das Escolinhas</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">5</td>
+                        <td>2</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">9</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Taça Redegol Brasil Fut7 S17</span>
+                                    <span class="player-position">REDEGOL</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">5</td>
+                        <td>3</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">10</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Taça Redegol Fut7 S18</span>
+                                    <span class="player-position">REDEGOL</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">4</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">11</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Sergipano Futsal S18</span>
+                                    <span class="player-position">FSFS</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">4</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">12</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Brasileiro Fut7 S17</span>
+                                    <span class="player-position">CBF7</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">3</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">13</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">Copa TV Atalaia Fut7 Adulto</span>
+                                    <span class="player-position">FSF7</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">3</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">14</td>
+                        <td>
+                            <div class="player-cell">
+                                <div class="player-avatar"><i class="fas fa-user"></i></div>
+                                <div class="player-info">
+                                    <span class="player-name">GrandPrix Fut7 S14</span>
+                                    <span class="player-position">FSF7</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highlight-cell">3</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </section>
 
-        <h2 class="section-title">Recordes do Clube</h2>
-        <div class="records-grid">
-            <div class="record-card">
-                <div class="record-icon"><i class="fas fa-fire"></i></div>
-                <div class="record-title">Maior Goleada</div>
-                <div class="record-value">9 x 0</div>
-                <div class="record-desc">vs. Falcões - Sergipano Futsal S16 2023</div>
+    <section class="recordes-section">
+        <h2 class="section-title">RECORDES DO CLUBE</h2>
+        <div class="recordes-grid">
+            <div class="recorde-card">
+                <div class="recorde-icon"><i class="fas fa-fire"></i></div>
+                <div class="recorde-titulo">Maior Goleada</div>
+                <div class="recorde-valor">9 x 0</div>
+                <div class="recorde-desc">vs. Falcões - Sergipano Futsal S16 2023</div>
             </div>
 
-            <div class="record-card">
-                <div class="record-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="record-title">Sequência Invicta</div>
-                <div class="record-value">5 jogos</div>
-                <div class="record-desc">Taça Redegol Fut7 S16 2022</div>
+            <div class="recorde-card">
+                <div class="recorde-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="recorde-titulo">Sequência Invicta</div>
+                <div class="recorde-valor">5 jogos</div>
+                <div class="recorde-desc">Taça Redegol Fut7 S16 2022</div>
             </div>
 
-            <div class="record-card">
-                <div class="record-icon"><i class="fas fa-star"></i></div>
-                <div class="record-title">Gols em uma Partida</div>
-                <div class="record-value">3 gols</div>
-                <div class="record-desc">Joaquim - 2023</div>
+            <div class="recorde-card">
+                <div class="recorde-icon"><i class="fas fa-star"></i></div>
+                <div class="recorde-titulo">Gols em uma Partida</div>
+                <div class="recorde-valor">3 gols</div>
+                <div class="recorde-desc">Joaquim Santos - 2023</div>
             </div>
 
-            <div class="record-card">
-                <div class="record-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="record-title">Defesa Menos Vazada</div>
-                <div class="record-value">7 gols</div>
-                <div class="record-desc">Fut7 S17 2023 - 5 jogos</div>
+            <div class="recorde-card">
+                <div class="recorde-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="recorde-titulo">Defesa Menos Vazada</div>
+                <div class="recorde-valor">7 gols</div>
+                <div class="recorde-desc">Fut7 S17 2023 - 5 jogos</div>
             </div>
 
-            <div class="record-card">
-                <div class="record-icon"><i class="fas fa-medal"></i></div>
-                <div class="record-title">Jogador Mais Títulos</div>
-                <div class="record-value">1 título</div>
-                <div class="record-desc">Joaquim Santos - Capitão</div>
+            <div class="recorde-card">
+                <div class="recorde-icon"><i class="fas fa-medal"></i></div>
+                <div class="recorde-titulo">Jogador Mais Títulos</div>
+                <div class="recorde-valor">1 título</div>
+                <div class="recorde-desc">Joaquim Santos - Capitão</div>
+            </div>
+
+            <div class="recorde-card">
+                <div class="recorde-icon"><i class="fas fa-bullseye"></i></div>
+                <div class="recorde-titulo">Melhor Média de Gols</div>
+                <div class="recorde-valor">1.14</div>
+                <div class="recorde-desc">Gabriel Costa - 8 gols em 7 jogos</div>
             </div>
         </div>
     </section>
@@ -270,23 +1129,171 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <div class="logo-img" style="margin-bottom: 20px; width: 70px; height: 70px; font-size: 24px;"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
                 <h3>REAL CLUBE ATLÉTICO</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="footer-section"><h3>Clube</h3><ul><li><a href="comeco.html">História</a></li><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></div>
-            <div class="footer-section"><h3>Equipes</h3><ul><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></div>
-            <div class="footer-section"><h3>Contato</h3><ul><li><a href="#">Fale Conosco</a></li><li><a href="#">Seja Sócio</a></li></ul></div>
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="historia.html">História</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                    <li><a href="estatisticas.html">Estatísticas</a></li>
+                    <li><a href="diretoria.html">Diretoria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Equipes</h3>
+                <ul>
+                    <li><a href="futsal.html">Futsal</a></li>
+                    <li><a href="fut7.html">Fut7</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="contato.html">Fale Conosco</a></li>
+                    <li><a href="mailto:contato.oficialrca@gmail.com">Imprensa</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.</p>
+            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
+        </div>
     </footer>
 
-    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
-    <script src="main.js"></script>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+
+        // Função de ordenação de tabelas
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            // Detectar direção da ordenação
+            const currentSort = table.dataset.sortColumn;
+            const currentDir = table.dataset.sortDir || 'asc';
+            let newDir = 'asc';
+            
+            if (currentSort == columnIndex) {
+                newDir = currentDir === 'asc' ? 'desc' : 'asc';
+            }
+            
+            table.dataset.sortColumn = columnIndex;
+            table.dataset.sortDir = newDir;
+            
+            // Ordenar linhas
+            rows.sort((a, b) => {
+                let aValue, bValue;
+                
+                if (columnIndex === 1) {
+                    // Ordenar por nome do jogador
+                    aValue = a.querySelectorAll('td')[columnIndex].querySelector('.player-name').textContent.trim();
+                    bValue = b.querySelectorAll('td')[columnIndex].querySelector('.player-name').textContent.trim();
+                } else {
+                    // Ordenar por números
+                    aValue = parseFloat(a.querySelectorAll('td')[columnIndex].textContent.trim()) || 0;
+                    bValue = parseFloat(b.querySelectorAll('td')[columnIndex].textContent.trim()) || 0;
+                }
+                
+                if (newDir === 'asc') {
+                    return aValue > bValue ? 1 : -1;
+                } else {
+                    return aValue < bValue ? 1 : -1;
+                }
+            });
+            
+            // Atualizar rankings
+            rows.forEach((row, index) => {
+                const rankCell = row.querySelector('.rank-cell');
+                rankCell.textContent = index + 1;
+                
+                // Remover/adicionar classe top-3
+                if (index < 3) {
+                    row.classList.add('top-3');
+                } else {
+                    row.classList.remove('top-3');
+                }
+            });
+            
+            // Reordenar no DOM
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Função de busca nas tabelas
+        function setupSearch(inputId, tableId) {
+            const input = document.getElementById(inputId);
+            const table = document.getElementById(tableId);
+            
+            input.addEventListener('input', function() {
+                const filter = this.value.toLowerCase();
+                const rows = table.querySelectorAll('tbody tr');
+                
+                rows.forEach(row => {
+                    const playerName = row.querySelector('.player-name').textContent.toLowerCase();
+                    if (playerName.includes(filter)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Configurar busca para cada tabela
+        setupSearch('searchJogos', 'tabelaJogos');
+        setupSearch('searchGols', 'tabelaGols');
+        setupSearch('searchAssist', 'tabelaAssist');
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animações ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-card, .tabela-container, .recorde-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Atualizar ano
+        const elementoAno = document.getElementById('anoAtual');
+        const data = new Date();
+        const anoAtual = data.getFullYear();
+        elementoAno.innerHTML = anoAtual;
+    </script>
 </body>
 </html>
