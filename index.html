@@ -710,7 +710,7 @@
                 <ul>
                     <li><a href="index.html">Início</a></li>
                     <li><a href="clube.html">Clube</a></li>
-                    <li><a href="jogos.html">Jogos</a></li>
+                    <li><a href="estatisticas.html">Estatísticas</a></li>
                     <li><a href="noticias.html">Notícias</a></li>
                     <li><a href="historia.html">História</a></li>
                 </ul>
@@ -728,7 +728,7 @@
             <h1>BEM-VINDO À REALEZA</h1>
             <p>Respeito, Comunhão e Ambição. Juntos fazemos história no futsal e futebol sergipano.</p>
             <div class="hero-buttons">
-                <button class="btn-primary">CONHEÇA O CLUBE</button>
+                <button class="btn-primary"><a href="clube.html">CONHEÇA O CLUBE</a></button>
                 <a href="#jogos" class="btn-secondary">PRÓXIMOS JOGOS</a>
             </div>
         </div>
@@ -762,11 +762,11 @@
         <br><br>
         <div class="jogos-container">
             <div class="jogo-wrapper">
-                <div class="jogo-card">
-                    <div class="jogo-label">Próximo Jogo</div>
+                <div class="jogo-card" onclick="toggleDetalhes(this)">
                     <div class="jogo-info">
+                        <div class="jogo-label">JOGO ANTERIOR</div>
                         <div class="jogo-campeonato">?</div>
-                        <div class="jogo-data">?, ? de ? - ?h</div>
+                        <div class="jogo-data">? de ? - ??h??</div>
                     </div>
                     <div class="jogo-times">
                         <div class="time">
@@ -784,30 +784,31 @@
                         </div>
                     </div>
                     <div class="jogo-detalhes">
-                        <div class="jogo-detalhes-texto">Detalhes sobre o próximo jogo.</div>
+                        <p class="jogo-detalhes-texto">Clique para mais informações sobre a partida</p>
                         <div class="jogo-detalhes-info">
                             <div class="info-item">
                                 <div class="info-label">Local</div>
-                                <div class="info-valor">Estádio XYZ</div>
+                                <div class="info-valor">?</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Ginásio</div>
+                                <div class="info-valor">?</div>
                             </div>
                             <div class="info-item">
                                 <div class="info-label">Ingressos</div>
-                                <div class="info-valor">À venda</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Transmissão</div>
-                                <div class="info-valor">TV Sergipe</div>
+                                <div class="info-valor">?</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="jogo-wrapper">
-                <div class="jogo-card">
-                    <div class="jogo-label">Último Jogo</div>
+                <div class="jogo-card" onclick="toggleDetalhes(this)">
                     <div class="jogo-info">
+                        <div class="jogo-label">PRÓXIMO JOGO</div>
                         <div class="jogo-campeonato">?</div>
-                        <div class="jogo-data">?, ? de ? - ?h</div>
+                        <div class="jogo-data">? de ? - ??h??</div>
                     </div>
                     <div class="jogo-times">
                         <div class="time">
@@ -825,19 +826,19 @@
                         </div>
                     </div>
                     <div class="jogo-detalhes">
-                        <div class="jogo-detalhes-texto">Detalhes sobre o último jogo.</div>
+                        <p class="jogo-detalhes-texto">Clique para mais informações sobre a partida</p>
                         <div class="jogo-detalhes-info">
                             <div class="info-item">
                                 <div class="info-label">Local</div>
-                                <div class="info-valor">Estádio ABC</div>
+                                <div class="info-valor">?</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label">Resultado</div>
-                                <div class="info-valor">2 - 1</div>
+                                <div class="info-label">Ginásio</div>
+                                <div class="info-valor">?</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label">Artilheiro</div>
-                                <div class="info-valor">Jogador A</div>
+                                <div class="info-label">Ingressos</div>
+                                <div class="info-valor">?</div>
                             </div>
                         </div>
                     </div>
@@ -896,24 +897,23 @@
                 <ul>
                     <li><a href="historia.html">História</a></li>
                     <li><a href="noticias.html">Notícias</a></li>
-                    <li><a href="#">Símbolos</a></li>
-                    <li><a href="#">Títulos</a></li>
+                    <li><a href="estatisticas.html">Estatísticas</a></li>
+                    <li><a href="diretoria.html">Diretoria</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Equipes</h3>
                 <ul>
-                    <li><a href="#">Futsal</a></li>
-                    <li><a href="#">Fut7</a></li>
-                    <li><a href="#">Feminino</a></li>
+                    <li><a href="futsal.html">Futsal</a></li>
+                    <li><a href="fut7.html">Fut7</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Contato</h3>
                 <ul>
-                    <li><a href="#">Fale Conosco</a></li>
-                    <li><a href="#">Seja RCA</a></li>
-                    <li><a href="#">Imprensa</a></li>
+                    <li><a href="contato.html">Fale Conosco</a></li>
+                    <li><a href="mailto:contato.oficialrca@gmail.com">Imprensa</a></li>
                 </ul>
             </div>
         </div>
@@ -926,6 +926,11 @@
     </footer>
 
     <script>
+        function toggleDetalhes(elemento) {
+            const detalhes = elemento.querySelector('.jogo-detalhes');
+            detalhes.classList.toggle('ativo');
+        }
+
         function toggleMenu() {
             const nav = document.querySelector('nav');
             nav.classList.toggle('active');
