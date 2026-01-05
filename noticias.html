@@ -2,104 +2,921 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0f1c2e">
     <title>Notícias - Real Clube Atlético</title>
+    <link rel="icon" href="escudo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="marca.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #0f1c2e;
+            --branco: #fdfdfd;
+            --dourado: #ff6b00;
+            --cinza: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--azul);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: var(--dourado);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--branco);
+            margin: 0 8px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--azul);
+        }
+
+        .logo-text {
+            color: var(--branco);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        .btn-socio {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-socio:hover {
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--branco);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .noticias-hero {
+            margin-top: 120px;
+            background: linear-gradient(135deg, var(--azul) 0%, #1a2b3f 100%);
+            padding: 80px 5%;
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .noticias-hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .noticias-hero p {
+            font-size: 24px;
+            color: rgba(253,253,253,0.8);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* FILTROS */
+        .filtros-section {
+            padding: 40px 5%;
+            background: var(--branco);
+            border-bottom: 2px solid var(--cinza);
+            position: sticky;
+            top: 120px;
+            z-index: 100;
+        }
+
+        .filtros-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filtro-btn {
+            background: transparent;
+            border: 2px solid var(--azul);
+            color: var(--azul);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .filtro-btn:hover,
+        .filtro-btn.active {
+            background: var(--dourado);
+            border-color: var(--dourado);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        /* DESTAQUE */
+        .destaque-section {
+            padding: 80px 5%;
+            background: var(--cinza);
+        }
+
+        .destaque-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--branco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .destaque-img {
+            height: 100%;
+            min-height: 400px;
+            background: linear-gradient(135deg, var(--azul) 0%, var(--dourado) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 120px;
+        }
+
+        .destaque-content {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .destaque-badge {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: fit-content;
+            text-transform: uppercase;
+        }
+
+        .destaque-titulo {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--azul);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .destaque-texto {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .destaque-meta {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .destaque-meta i {
+            color: var(--dourado);
+        }
+
+        .btn-ler-mais {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: fit-content;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-ler-mais:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,0,0.3);
+        }
+
+        /* GRADE DE NOTÍCIAS */
+        .noticias-section {
+            padding: 80px 5%;
+            background: var(--branco);
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--azul);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--dourado);
+        }
+
+        .noticias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .noticia-card {
+            background: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .noticia-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .noticia-img {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, var(--azul) 0%, var(--dourado) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .noticia-categoria {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .noticia-content {
+            padding: 30px;
+        }
+
+        .noticia-titulo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 15px;
+            line-height: 1.4;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .noticia-resumo {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .noticia-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--cinza);
+        }
+
+        .noticia-data {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .noticia-data i {
+            color: var(--dourado);
+            margin-right: 5px;
+        }
+
+        .noticia-link {
+            color: var(--dourado);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* PAGINAÇÃO */
+        .paginacao {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 60px;
+        }
+
+        .paginacao button {
+            background: var(--branco);
+            border: 2px solid var(--azul);
+            color: var(--azul);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .paginacao button:hover,
+        .paginacao button.active {
+            background: var(--dourado);
+            border-color: var(--dourado);
+            color: var(--branco);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--dourado);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(253,253,253,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(253,253,253,0.1);
+            color: rgba(253,253,253,0.6);
+        }
+
+        .footer-bottom a {
+            color: var(--dourado);
+            text-decoration: none;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 968px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul);
+                padding: 20px;
+            }
+
+            nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .noticias-hero h1 {
+                font-size: 36px;
+            }
+
+            .noticias-hero p {
+                font-size: 18px;
+            }
+
+            .destaque-card {
+                grid-template-columns: 1fr;
+            }
+
+            .destaque-img {
+                min-height: 300px;
+            }
+
+            .destaque-content {
+                padding: 40px 30px;
+            }
+
+            .destaque-titulo {
+                font-size: 28px;
+            }
+
+            .noticias-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .noticias-hero h1 {
+                font-size: 28px;
+            }
+
+            .noticias-hero p {
+                font-size: 16px;
+            }
+
+            .filtros-container {
+                gap: 10px;
+            }
+
+            .filtro-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            .destaque-content {
+                padding: 30px 20px;
+            }
+
+            .destaque-titulo {
+                font-size: 24px;
+            }
+
+            .noticia-content {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <div class="logo">
-                <img src="escudo.png" alt="RCA" class="logo-img">
-                <span class="logo-text">REAL CLUBE ATLÉTICO</span>
+        <div class="top-bar">
+            <div class="social-links">
+                <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
             </div>
-            <div class="header-actions">
-                <button class="btn-socio">SEJA SÓCIO REALEZA</button>
-                <div class="hamburger"><span></span><span></span><span></span></div>
+            <div style="color: var(--branco); font-size: 12px; font-weight: 600;">
+                <i class="fas fa-phone"></i> CONTATO: (79) 9 8866-3905
             </div>
         </div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="#">Clube</a><ul class="dropdown-menu"><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></li>
-                <li><a href="#">História</a><ul class="dropdown-menu"><li><a href="comeco.html">Começo</a></li><li><a href="titulos.html">Títulos</a></li><li><a href="tecnicos.html">Técnicos</a></li><li><a href="estatisticas.html">Estatísticas</a></li></ul></li>
-                <li><a href="#">Elenco</a><ul class="dropdown-menu"><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></li>
-                <li><a href="noticias.html" class="active">Notícias</a></li>
-            </ul>
-        </nav>
+        <div class="main-header">
+            <div class="logo-container" onclick="window.location.href='index.html'">
+                <div class="logo-img"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="logo-text">REAL CLUBE ATLÉTICO</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Início</a></li>
+                    <li><a href="index.html#clube">Clube</a></li>
+                    <li><a href="index.html#jogos">Jogos</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                    <li><a href="historia.html">História</a></li>
+                </ul>
+            </nav>
+            <button class="btn-socio">SEJA RCA</button>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
     </header>
 
-    <section class="page-header">
-        <h1 class="page-title">Notícias</h1>
-        <p class="page-subtitle">Fique por dentro de tudo que acontece no RCA</p>
+    <section class="noticias-hero">
+        <h1>NOTÍCIAS DO RCA</h1>
+        <p>Acompanhe todas as novidades, conquistas e bastidores da Realeza</p>
+    </section>
+
+    <section class="filtros-section">
+        <div class="filtros-container">
+            <button class="filtro-btn active" data-filtro="todas">Todas</button>
+            <button class="filtro-btn" data-filtro="destaque">Destaques</button>
+            <button class="filtro-btn" data-filtro="futsal">Futsal</button>
+            <button class="filtro-btn" data-filtro="fut7">Fut7</button>
+            <button class="filtro-btn" data-filtro="elenco">Elenco</button>
+            <button class="filtro-btn" data-filtro="bastidores">Bastidores</button>
+        </div>
+    </section>
+
+    <section class="destaque-section">
+        <div class="destaque-card">
+            <div class="destaque-img">
+                <img src="news001.jpg" alt="Destaque" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="destaque-content">
+                <div class="destaque-badge">🏆 DESTAQUE</div>
+                <h2 class="destaque-titulo">RCA conquista título inédito na Taça Redegol Sub-16</h2>
+                <div class="destaque-meta">
+                    <span><i class="fas fa-calendar-alt"></i> 23 de Outubro, 2022</span>
+                    <span><i class="fas fa-eye"></i> 3.542 visualizações</span>
+                </div>
+                <p class="destaque-texto">
+                    Time estreante domina competição em Aracaju e fatura primeiro troféu com campanha impecável, garantindo vaga no Campeonato Brasileiro de 2023.
+                </p>
+                <a href="news001.html" class="btn-ler-mais">Leia a matéria completa</a>
+            </div>
+        </div>
     </section>
 
     <section class="noticias-section">
-        <article class="noticia-destaque">
-            <div class="destaque-img">
-                <i class="fas fa-newspaper"></i>
-            </div>
-            <div class="destaque-content">
-                <span class="destaque-categoria">DESTAQUE</span>
-                <h2 class="destaque-titulo">RCA conquista título invicto e faz história na Taça Redegol de Fut7 2022</h2>
-                <div class="destaque-meta">
-                    <span><i class="fas fa-calendar-alt"></i> 05 de Novembro, 2022</span>
-                    <span><i class="fas fa-user"></i> Por Redação RCA</span>
-                    <span><i class="fas fa-eye"></i> 2.543 visualizações</span>
-                </div>
-                <p class="destaque-texto">
-                    Em uma campanha memorável, o Real Clube Atlético conquistou o Campeonato Estadual de Fut7 sem sofrer nenhuma derrota. Com 5 jogos, a equipe mostrou força, técnica e união, consolidando-se como uma das maiores potências do estado. O título foi conquistado após vitória no shootout contra a Botelho.
-                </p>
-            </div>
-        </article>
-
-        <div class="filtros">
-            <button class="filtro-btn active">Todas</button>
-            <button class="filtro-btn">Futsal</button>
-            <button class="filtro-btn">Fut7</button>
-            <button class="filtro-btn">Bastidores</button>
-        </div>
-
+        <h2 class="section-title">TODAS AS NOTÍCIAS</h2>
         <div class="noticias-grid">
-            <article class="noticia-card">
+            <!-- Notícia 1 -->
+            <div class="noticia-card" data-categoria="elenco">
                 <div class="noticia-img">
+                    <div class="noticia-categoria">ELENCO</div>
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="noticia-content">
-                    <span class="noticia-categoria">ELENCO</span>
-                    <h3 class="noticia-titulo">Elenco começa a ser montado para 2026</h3>
-                    <p class="noticia-resumo">A diretoria do RCA anunciará a contratação de novos atletas experientes que vão agregar qualidade técnica e experiência ao time.</p>
-                    <div class="noticia-meta">
-                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 03 Nov 2025</span>
-                        <button class="btn-ler-mais">Ler mais</button>
+                    <h3 class="noticia-titulo">Elenco começa a ser montado para temporada 2026</h3>
+                    <p class="noticia-resumo">Diretoria trabalha na contratação de atletas experientes para reforçar o time na volta às competições oficiais.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 15 Jan 2026</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-            </article>
+            </div>
+
+            <!-- Notícia 2 -->
+            <div class="noticia-card" data-categoria="bastidores">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">BASTIDORES</div>
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Bastidores do retorno: preparação intensa para 2026</h3>
+                    <p class="noticia-resumo">Conheça os detalhes da preparação do RCA para o retorno às competições após dois anos de pausa estratégica.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 10 Jan 2026</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 3 -->
+            <div class="noticia-card" data-categoria="futsal">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">FUTSAL</div>
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">RCA confirma inscrição no Sergipano de Futsal 2026</h3>
+                    <p class="noticia-resumo">Clube oficializa participação no campeonato estadual e busca a primeira conquista na modalidade.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 08 Jan 2026</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 4 -->
+            <div class="noticia-card" data-categoria="fut7">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">FUT7</div>
+                    <i class="fas fa-running"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Relembre: A final épica que deu o primeiro título ao RCA</h3>
+                    <p class="noticia-resumo">Há 4 anos, o RCA conquistava seu primeiro título em uma final emocionante decidida nos shoot-outs.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 05 Jan 2026</span>
+                        <a href="news001.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 5 -->
+            <div class="noticia-card" data-categoria="elenco">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">ELENCO</div>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Cinco atletas já confirmados para o projeto de retorno</h3>
+                    <p class="noticia-resumo">Base do elenco adulto está formada e clube busca mais reforços para completar o time.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 02 Jan 2026</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 6 -->
+            <div class="noticia-card" data-categoria="bastidores">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">BASTIDORES</div>
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Diretoria planeja instalação própria para treinos</h3>
+                    <p class="noticia-resumo">RCA trabalha no projeto de ter uma estrutura própria para preparação da equipe.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 28 Dez 2025</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 7 -->
+            <div class="noticia-card" data-categoria="destaque">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">HISTÓRIA</div>
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Especial: 7 anos de história do Real Clube Atlético</h3>
+                    <p class="noticia-resumo">Do sonho em 2019 ao retorno em 2026 - conheça toda a trajetória da Realeza no esporte sergipano.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 20 Dez 2025</span>
+                        <a href="historia.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 8 -->
+            <div class="noticia-card" data-categoria="futsal">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">FUTSAL</div>
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">Relembre as semifinais do Sergipano de Futsal 2023</h3>
+                    <p class="noticia-resumo">RCA teve boas campanhas nas categorias Sub-17 e Sub-19, mostrando evolução no futsal.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 15 Dez 2025</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notícia 9 -->
+            <div class="noticia-card" data-categoria="fut7">
+                <div class="noticia-img">
+                    <div class="noticia-categoria">FUT7</div>
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="noticia-content">
+                    <h3 class="noticia-titulo">A experiência no Brasileiro: RCA enfrentando o país</h3>
+                    <p class="noticia-resumo">Participação no Campeonato Brasileiro 2023 em Maceió marcou novo patamar para o clube.</p>
+                    <div class="noticia-footer">
+                        <span class="noticia-data"><i class="fas fa-calendar-alt"></i> 10 Dez 2025</span>
+                        <a href="#" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="paginacao">
+            <button><i class="fas fa-chevron-left"></i></button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <img src="escudo.png" alt="RCA" style="width: 80px; margin-bottom: 1rem;">
+                <div class="logo-img" style="margin-bottom: 20px; width: 70px; height: 70px; font-size: 24px;"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
                 <h3>REAL CLUBE ATLÉTICO</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="footer-section"><h3>Clube</h3><ul><li><a href="comeco.html">História</a></li><li><a href="diretoria.html">Diretoria</a></li><li><a href="simbolos.html">Símbolos</a></li></ul></div>
-            <div class="footer-section"><h3>Equipes</h3><ul><li><a href="futsal.html">Futsal</a></li><li><a href="fut7.html">Fut7</a></li></ul></div>
-            <div class="footer-section"><h3>Contato</h3><ul><li><a href="#">Fale Conosco</a></li><li><a href="#">Seja Sócio</a></li></ul></div>
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="historia.html">História</a></li>
+                    <li><a href="#">Diretoria</a></li>
+                    <li><a href="#">Símbolos</a></li>
+                    <li><a href="#">Títulos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Equipes</h3>
+                <ul>
+                    <li><a href="#">Futsal</a></li>
+                    <li><a href="#">Fut7</a></li>
+                    <li><a href="#">Feminino</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="#">Fale Conosco</a></li>
+                    <li><a href="#">Seja Sócio</a></li>
+                    <li><a href="#">Imprensa</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 Real Clube Atlético. Todos os direitos reservados.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.
+            </p>
+            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a
+                    href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
+        </div>
     </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
 
-    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
-    <script src="main.js"></script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animações ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.noticia-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        const elementoAno = document.getElementById('anoAtual');
+        const data = new Date();
+        const anoAtual = data.getFullYear();
+        elementoAno.innerHTML = anoAtual;
+    </script>
 </body>
 </html>

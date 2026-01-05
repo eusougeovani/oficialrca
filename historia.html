@@ -828,6 +828,11 @@
     
         // Scroll suave para o topo ao carregar
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const elementoAno = document.getElementById('anoAtual');
+        const data = new Date();
+        const anoAtual = data.getFullYear();
+        elementoAno.innerHTML = anoAtual;
     </script>
 </body>
 </html>

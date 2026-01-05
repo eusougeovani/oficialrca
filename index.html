@@ -831,6 +831,11 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        const elementoAno = document.getElementById('anoAtual');
+        const data = new Date();
+        const anoAtual = data.getFullYear();
+        elementoAno.innerHTML = anoAtual;
     </script>
 </body>
 </html>
