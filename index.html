@@ -234,29 +234,16 @@
             background: var(--cinza);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
+        .jogos-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .section-title {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--azul);
-            margin-bottom: 10px;
+        .jogo-wrapper {
             position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--dourado);
         }
 
         .jogo-card {
@@ -264,8 +251,28 @@
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            max-width: 800px;
-            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .jogo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: var(--dourado);
+        }
+
+        .jogo-label {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .jogo-info {
@@ -322,6 +329,63 @@
             font-size: 24px;
             font-weight: 900;
             color: var(--dourado);
+        }
+
+        .jogo-detalhes {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--cinza);
+            text-align: center;
+        }
+
+        .jogo-detalhes.ativo {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .jogo-detalhes-texto {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .jogo-detalhes-info {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .info-valor {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--azul);
         }
 
         /* ESTATÍSTICAS */
@@ -583,6 +647,10 @@
             .vs {
                 transform: rotate(90deg);
             }
+
+            .jogos-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -634,17 +702,17 @@
             </div>
         </div>
         <div class="main-header">
-            <div class="logo-container">
+            <div class="logo-container" onclick="window.location.href='index.html'">
                 <div class="logo-img"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
                 <div class="logo-text">REAL CLUBE ATLÉTICO</div>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#clube">Clube</a></li>
-                    <li><a href="#jogos">Jogos</a></li>
-                    <li><a href="#noticias">Notícias</a></li>
-                    <li><a href="#historia">História</a></li>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="clube.html">Clube</a></li>
+                    <li><a href="jogos.html">Jogos</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                    <li><a href="historia.html">História</a></li>
                 </ul>
             </nav>
             <button class="btn-socio">SEJA RCA</button>
@@ -689,26 +757,90 @@
 
     <section class="proximos-jogos" id="jogos">
         <div class="section-header">
-            <h2 class="section-title">PRÓXIMOS JOGOS</h2>
+            <h2 class="section-title">CALENDÁRIO DE JOGOS</h2>
         </div>
-        <div class="jogo-card">
-            <div class="jogo-info">
-                <div class="jogo-campeonato">?</div>
-                <div class="jogo-data">?, ? de ? - ?h</div>
-            </div>
-            <div class="jogo-times">
-                <div class="time">
-                    <div class="time-escudo">
-                        <i class="fas fa-shield-alt"></i>
+        <br><br>
+        <div class="jogos-container">
+            <div class="jogo-wrapper">
+                <div class="jogo-card">
+                    <div class="jogo-label">Próximo Jogo</div>
+                    <div class="jogo-info">
+                        <div class="jogo-campeonato">?</div>
+                        <div class="jogo-data">?, ? de ? - ?h</div>
                     </div>
-                    <div class="time-nome">?</div>
+                    <div class="jogo-times">
+                        <div class="time">
+                            <div class="time-escudo">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="time-nome">?</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="time">
+                            <div class="time-escudo">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="time-nome">?</div>
+                        </div>
+                    </div>
+                    <div class="jogo-detalhes">
+                        <div class="jogo-detalhes-texto">Detalhes sobre o próximo jogo.</div>
+                        <div class="jogo-detalhes-info">
+                            <div class="info-item">
+                                <div class="info-label">Local</div>
+                                <div class="info-valor">Estádio XYZ</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Ingressos</div>
+                                <div class="info-valor">À venda</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Transmissão</div>
+                                <div class="info-valor">TV Sergipe</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="vs">VS</div>
-                <div class="time">
-                    <div class="time-escudo">
-                        <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="jogo-wrapper">
+                <div class="jogo-card">
+                    <div class="jogo-label">Último Jogo</div>
+                    <div class="jogo-info">
+                        <div class="jogo-campeonato">?</div>
+                        <div class="jogo-data">?, ? de ? - ?h</div>
                     </div>
-                    <div class="time-nome">?</div>
+                    <div class="jogo-times">
+                        <div class="time">
+                            <div class="time-escudo">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="time-nome">?</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="time">
+                            <div class="time-escudo">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="time-nome">?</div>
+                        </div>
+                    </div>
+                    <div class="jogo-detalhes">
+                        <div class="jogo-detalhes-texto">Detalhes sobre o último jogo.</div>
+                        <div class="jogo-detalhes-info">
+                            <div class="info-item">
+                                <div class="info-label">Local</div>
+                                <div class="info-valor">Estádio ABC</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Resultado</div>
+                                <div class="info-valor">2 - 1</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Artilheiro</div>
+                                <div class="info-valor">Jogador A</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -742,7 +874,7 @@
                 <button class="btn-primary" style="margin-top: 20px;"><a href="historia.html">CONHEÇA MAIS</a></button>
             </div>
             <div class="historia-img">
-                <img src="historia.png" alt="História RCA" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="historia.png" alt="História RCA" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
             </div>
         </div>
     </section>
@@ -763,7 +895,7 @@
                 <h3>Clube</h3>
                 <ul>
                     <li><a href="historia.html">História</a></li>
-                    <li><a href="#">Diretoria</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
                     <li><a href="#">Símbolos</a></li>
                     <li><a href="#">Títulos</a></li>
                 </ul>
@@ -780,7 +912,7 @@
                 <h3>Contato</h3>
                 <ul>
                     <li><a href="#">Fale Conosco</a></li>
-                    <li><a href="#">Seja Sócio</a></li>
+                    <li><a href="#">Seja RCA</a></li>
                     <li><a href="#">Imprensa</a></li>
                 </ul>
             </div>
