@@ -528,6 +528,104 @@
             text-decoration: none;
         }
 
+        /* PATROCINADORES (adicionado) */
+        .patrocinadores-section {
+            padding: 40px 5%;
+            background: transparent;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .patrocinadores-section .patrocinadores-titulo {
+            color: var(--branco);
+            font-size: 18px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .patrocinadores-grid,
+        .parceiros-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0 30px;
+        }
+
+        /* logos principais (primeiras duas) destacadas */
+        .patrocinadores-grid a:nth-child(1) img,
+        .patrocinadores-grid a:nth-child(2) img {
+            max-height: 80px;
+        }
+
+        /* logos padrão patrocinadores */
+        .patrocinadores-grid .patrocinador-logo {
+            max-height: 54px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.95;
+            transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+            filter: grayscale(0);
+        }
+
+        /* logos parceiros menores */
+        .parceiros-grid .patrocinador-logo {
+            max-height: 48px;
+            opacity: 0.95;
+        }
+
+        /* link wrapper */
+        .patrocinador-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            background: transparent;
+            border-radius: 6px;
+        }
+
+        /* hover */
+        .patrocinador-link:hover .patrocinador-logo {
+            transform: translateY(-6px) scale(1.04);
+            opacity: 1;
+            filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+        }
+
+        /* responsivo */
+        @media (max-width: 768px) {
+            .patrocinadores-grid,
+            .parceiros-grid {
+                gap: 14px;
+            }
+            .patrocinadores-grid a:nth-child(1) img,
+            .patrocinadores-grid a:nth-child(2) img {
+                max-height: 64px;
+            }
+            .patrocinadores-grid .patrocinador-logo {
+                max-height: 46px;
+            }
+            .parceiros-grid .patrocinador-logo {
+                max-height: 40px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .patrocinadores-grid,
+            .parceiros-grid {
+                gap: 10px;
+            }
+            .patrocinadores-section {
+                padding: 24px 4%;
+            }
+            .patrocinadores-section .patrocinadores-titulo {
+                font-size: 16px;
+            }
+        }
+
         /* RESPONSIVO */
         @media (max-width: 968px) {
             nav {
@@ -674,10 +772,6 @@
             <div class="meta-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Aracaju, SE</span>
-            </div>
-            <div class="meta-item">
-                <i class="fas fa-clock"></i>
-                <span>5 min de leitura</span>
             </div>
         </div>
     </section>
@@ -836,6 +930,28 @@
                 </ul>
             </div>
         </div>
+        <!-- PATROCINADORES E PARCEIROS -->
+        <div class="patrocinadores-section">
+            <h3 class="patrocinadores-titulo">PATROCINADORES</h3>
+            <div class="patrocinadores-grid">
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="patrocinio/geocode.png" alt="GeoCODE" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="patrocinio/mf.png" alt="Psi Meire França" class="patrocinador-logo">
+                </a>
+            </div>
+
+            <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
+            <div class="parceiros-grid">
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="patrocinio/aljed.png" alt="Aljed" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="patrocinio/cepe.png" alt="CEPE/SE" class="patrocinador-logo">
+                </a>
+            </div>
+        </div>
         <div class="footer-bottom">
             <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.
             </p>
@@ -843,6 +959,7 @@
                     href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
         </div>
     </footer>
+
     <script>
         function toggleMenu() {
             const nav = document.querySelector('nav');
