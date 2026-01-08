@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0f1c2e">
+    <title>RCA anuncia retorno para 2026 - @oficialrca</title>
+    <link rel="icon" href="images/escudo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #0f1c2e;
+            --branco: #fdfdfd;
+            --dourado: #ff6b00;
+            --cinza: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--azul);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: var(--dourado);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--branco);
+            margin: 0 8px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--azul);
+        }
+
+        .logo-text {
+            color: var(--branco);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        .btn-socio {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-socio:hover {
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--branco);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ARTICLE HERO */
+        .article-hero {
+            margin-top: 120px;
+            background: linear-gradient(135deg, var(--azul) 0%, #1a2b3f 100%);
+            padding: 60px 5% 40px;
+            color: var(--branco);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: rgba(253,253,253,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--dourado);
+        }
+
+        .breadcrumb i {
+            color: rgba(253,253,253,0.5);
+            font-size: 10px;
+        }
+
+        .article-category {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .article-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 1000px;
+        }
+
+        .article-subtitle {
+            font-size: 22px;
+            color: rgba(253,253,253,0.8);
+            margin-bottom: 30px;
+            max-width: 900px;
+            line-height: 1.4;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 1px solid rgba(253,253,253,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: rgba(253,253,253,0.7);
+        }
+
+        .meta-item i {
+            color: var(--dourado);
+        }
+
+        /* ARTICLE CONTENT */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .article-featured-img {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--azul) 0%, var(--dourado) 100%);
+            border-radius: 15px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 120px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .article-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .article-content h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--azul);
+            margin: 50px 0 25px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .article-content h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--dourado);
+            border-radius: 3px;
+        }
+
+        .article-content p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .article-content strong {
+            color: var(--azul);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: var(--cinza);
+            border-left: 5px solid var(--dourado);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-style: italic;
+            color: #555;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .stats-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            padding: 40px;
+            background: var(--azul);
+            border-radius: 15px;
+            color: var(--branco);
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--dourado);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(253,253,253,0.8);
+            text-transform: uppercase;
+        }
+
+        .ficha-tecnica {
+            background: var(--cinza);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+
+        .ficha-tecnica h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--azul);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .ficha-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .ficha-content strong {
+            color: var(--azul);
+        }
+
+        .placar {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--dourado);
+            margin: 20px 0;
+        }
+
+        .elenco-list {
+            background: var(--branco);
+            padding: 30px;
+            border: 2px solid var(--dourado);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .calendario-box {
+            background: var(--azul);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            color: var(--branco);
+        }
+
+        .calendario-box h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dourado);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .calendario-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .calendario-section h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dourado);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--dourado);
+            padding-bottom: 10px;
+        }
+
+        .calendario-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .calendario-section li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(253,253,253,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .calendario-section li i {
+            color: var(--dourado);
+            width: 20px;
+        }
+
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .info-box {
+            background: var(--cinza);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 4px solid var(--dourado);
+        }
+
+        .info-box-icon {
+            font-size: 40px;
+            color: var(--dourado);
+            margin-bottom: 15px;
+        }
+
+        .info-box-number {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--azul);
+            margin-bottom: 10px;
+        }
+
+        .info-box-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* COMPARTILHAR */
+        .share-section {
+            margin: 60px 0;
+            padding: 30px;
+            background: var(--cinza);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .share-section h3 {
+            font-size: 20px;
+            color: var(--azul);
+            margin-bottom: 20px;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .share-btn.facebook { background: #3b5998; }
+        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn.linkedin { background: #0077b5; }
+
+        /* NOTÍCIAS RELACIONADAS */
+        .related-news {
+            background: var(--cinza);
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--azul);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--dourado);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--azul) 0%, var(--dourado) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 50px;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-category {
+            color: var(--dourado);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(157px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--dourado);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(253,253,253,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(253,253,253,0.1);
+            color: rgba(253,253,253,0.6);
+        }
+
+        .footer-bottom a {
+            color: var(--dourado);
+            text-decoration: none;
+        }
+
+        /* PATROCINADORES (adicionado) */
+        .patrocinadores-section {
+            padding: 40px 5%;
+            background: transparent;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .patrocinadores-section .patrocinadores-titulo {
+            color: var(--branco);
+            font-size: 18px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .patrocinadores-grid,
+        .parceiros-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0 30px;
+        }
+
+        /* logos principais (primeiras duas) destacadas */
+        .patrocinadores-grid a:nth-child(1) img,
+        .patrocinadores-grid a:nth-child(2) img {
+            max-height: 80px;
+        }
+
+        /* logos padrão patrocinadores */
+        .patrocinadores-grid .patrocinador-logo {
+            max-height: 54px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.95;
+            transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+            filter: grayscale(0);
+        }
+
+        /* logos parceiros menores */
+        .parceiros-grid .patrocinador-logo {
+            max-height: 48px;
+            opacity: 0.95;
+        }
+
+        /* link wrapper */
+        .patrocinador-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            background: transparent;
+            border-radius: 6px;
+        }
+
+        /* hover */
+        .patrocinador-link:hover .patrocinador-logo {
+            transform: translateY(-6px) scale(1.04);
+            opacity: 1;
+            filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+        }
+
+        /* responsivo */
+        @media (max-width: 768px) {
+            .patrocinadores-grid,
+            .parceiros-grid {
+                gap: 14px;
+            }
+            .patrocinadores-grid a:nth-child(1) img,
+            .patrocinadores-grid a:nth-child(2) img {
+                max-height: 64px;
+            }
+            .patrocinadores-grid .patrocinador-logo {
+                max-height: 46px;
+            }
+            .parceiros-grid .patrocinador-logo {
+                max-height: 40px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .patrocinadores-grid,
+            .parceiros-grid {
+                gap: 10px;
+            }
+            .patrocinadores-section {
+                padding: 24px 4%;
+            }
+            .patrocinadores-section .patrocinadores-titulo {
+                font-size: 16px;
+            }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 968px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul);
+                padding: 20px;
+            }
+
+            nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .article-title {
+                font-size: 32px;
+            }
+
+            .article-subtitle {
+                font-size: 18px;
+            }
+
+            .article-featured-img {
+                height: 300px;
+                font-size: 80px;
+            }
+
+            .article-content {
+                font-size: 16px;
+            }
+
+            .article-content h2 {
+                font-size: 24px;
+            }
+
+            .stats-highlight {
+                grid-template-columns: 1fr 1fr;
+                padding: 25px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+            
+            .calendario-content {
+                grid-template-columns: 1fr;
+            }
+
+            .info-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .article-title {
+                font-size: 24px;
+            }
+
+            .article-subtitle {
+                font-size: 16px;
+            }
+
+            .article-meta {
+                gap: 15px;
+            }
+
+            .article-featured-img {
+                height: 250px;
+                font-size: 60px;
+            }
+
+            .ficha-tecnica {
+                padding: 25px;
+            }
+
+            .stats-highlight {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendario-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                <a href="https://wa.me/+5579988663905"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div style="color: var(--branco); font-size: 12px; font-weight: 600;">
+                <i class="fas fa-phone"></i> CONTATO: (79) 9 8866-3905
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="logo-container" onclick="window.location.href='index.html'">
+                <div class="logo-img"><img src="images/escudo.png" alt="Escudo RCA" style="width: 75px; height: 75px"></div>
+                <div class="logo-text">REAL CLUBE ATLÉTICO</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="clube.html">Clube</a></li>
+                    <li><a href="historia.html">História</a></li>
+                    <li><a href="futebol.html">Futebol</a></li>
+                    <li><a href="imprensa.html">Imprensa</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio" style="text-decoration: none;">SEJA RCA</a>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="article-hero">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="noticias.html">Notícias</a>
+            <i class="fas fa-chevron-right"></i>
+            <span style="color: var(--branco);">Retorno 2026</span>
+        </div>
+        <div class="article-category">🔙 RETORNO</div>
+        <h1 class="article-title">RCA anuncia retorno e inicia preparação para temporada adulta 2026</h1>
+        <p class="article-subtitle">Presidente Geovani Santos revela planejamento estratégico para volta do clube às competições de Futebol 7</p>
+        <div class="article-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Janeiro de 2026</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Aracaju, SE</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>6 min de leitura</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="article-container">
+        <div class="article-featured-img">
+            <i class="fas fa-play-circle"></i>
+        </div>
+
+        <div class="article-content">
+            <p>Após dois anos afastado das competições, o <strong>Real Clube Atlético</strong> oficializou seu retorno ao esporte sergipano. Em comunicado à família RCA, o presidente e fundador <strong>Geovani Santos</strong> anunciou o início da preparação para a <strong>temporada adulta masculina de 2026</strong>, com competições já confirmadas para abril, junho e setembro.</p>
+
+            <div class="highlight-box">
+                <p>"Nossa temporada finalmente deu pontapé inicial, e com isso, nosso primeiro passo é com a parte administrativa" - Geovani Santos, Presidente do RCA</p>
+            </div>
+
+            <h2>Quatro meses de planejamento</h2>
+            
+            <p>Com o calendário definido para disputas em <strong>abril, junho e setembro</strong>, a diretoria do RCA terá quatro meses cruciais para reorganizar todos os setores do clube. O foco está na estruturação administrativa, financeira e, principalmente, futebolística.</p>
+
+            <p>Entre as prioridades estabelecidas pela presidência estão a formação do elenco para as competições, a marcação de treinos com frequência de duas a quatro vezes por mês, e a definição das lideranças administrativas da equipe.</p>
+
+            <div class="info-boxes">
+                <div class="info-box">
+                    <div class="info-box-icon"><i class="fas fa-users"></i></div>
+                    <div class="info-box-number">10-15</div>
+                    <div class="info-box-label">Jogadores no Elenco</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="info-box-number">3-5</div>
+                    <div class="info-box-label">Competições em 2026</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-icon"><i class="fas fa-dumbbell"></i></div>
+                    <div class="info-box-number">2-4x</div>
+                    <div class="info-box-label">Treinos por Mês</div>
+                </div>
+            </div>
+
+            <h2>Nova estrutura organizacional</h2>
+
+            <p>Uma das principais mudanças anunciadas pelo presidente diz respeito à distribuição de responsabilidades dentro do clube. <strong>Geovani Santos</strong>, que historicamente concentrou todas as funções administrativas, revelou que agora delegará atribuições aos membros mais antigos da instituição.</p>
+
+            <p>"Na questão da administração, muitos sabem que no início eu fiquei responsável por todos os setores do clube e fui repassando algumas responsabilidades para a comissão técnica antiga. Agora em 2026 darei prioridade aos membros mais antigos do clube para me auxiliar quanto a questão de documentações, logística e econômica", explicou o fundador.</p>
+
+            <p>Essa descentralização administrativa representa um amadurecimento institucional importante, permitindo que o presidente foque em decisões estratégicas enquanto conta com uma equipe de gestão mais robusta.</p>
+
+            <h2>Formação do elenco</h2>
+
+            <p>Para a temporada adulta, o RCA planeja montar um elenco <strong>enxuto, mas competitivo, com 10 a 15 jogadores</strong>. O presidente convocou os interessados a manifestarem interesse em integrar a "Família RCA", abrindo um processo de sugestões e debates sobre possíveis nomes.</p>
+
+            <p>Atualmente, <strong>cinco atletas já estão comprometidos</strong> com o projeto de retorno, formando a base do que será o primeiro elenco adulto da história do clube. A expectativa é completar o grupo nas próximas semanas, priorizando jogadores que compartilhem dos valores e da filosofia de trabalho do RCA.</p>
+
+            <h2>Cronograma de treinos</h2>
+
+            <p>O planejamento inclui uma rotina de treinos que pode variar entre <strong>duas a quatro vezes por mês</strong>, dependendo da proximidade das competições. Essa periodicidade busca equilibrar a preparação física e tática dos atletas com a disponibilidade de tempo dos jogadores, considerando que muitos mantêm outras atividades profissionais e acadêmicas.</p>
+
+            <p>A marcação dos treinos faz parte da reorganização estrutural do clube, que busca profissionalizar ainda mais suas operações mantendo a essência amadora e apaixonada que sempre caracterizou o RCA.</p>
+
+            <h2>Do sonho juvenil ao projeto adulto</h2>
+
+            <p>A transição para a categoria adulta representa um marco na história do clube fundado em 2019 pelos irmãos Geovani e Joaquim de França. Após campanhas vitoriosas nas categorias de base, incluindo o título da <strong>Taça Redegol Sub-16 em 2022</strong> e a participação no <strong>Campeonato Brasileiro de 2023</strong>, o RCA agora busca consolidar-se também na catrgoria adulta.</p>
+
+            <p>O retorno não poderia ser mais simbólico: sete anos após sua fundação, o clube que nasceu com apenas sete jogadores para disputar o BrasileirãoAJU agora se prepara para competir em nível adulto, carregando uma bagagem de experiências, títulos e, principalmente, uma identidade consolidada.</p>
+
+            <h2>Perspectivas para 2026</h2>
+
+            <p>Com três competições já no calendário e um planejamento estratégico bem delineado, o RCA projeta <strong>2026 como o ano do recomeço maduro</strong>. A combinação entre a experiência administrativa acumulada, a paixão dos fundadores e o apoio da comunidade que se formou ao redor do clube cria um ambiente favorável para resultados expressivos.</p>
+
+            <div class="highlight-box">
+                <p>"Precisamos planejar a formação de elenco para as competições, a marcação de treinos (2x ou 4x no mês) e lideranças administrativas da equipe" - Geovani Santos</p>
+            </div>
+
+            <p style="text-align: center; font-size: 24px; font-weight: 700; color: var(--dourado); margin: 40px 0;">O Real Clube Atlético volta. E volta para vencer.</p>
+
+            <div class="calendario-box">
+                <h3>CALENDÁRIO E PRÓXIMOS PASSOS</h3>
+                <div class="calendario-content">
+                    <div class="calendario-section">
+                        <h4>Competições Previstas</h4>
+                        <ul>
+                            <li><i class="fas fa-trophy"></i> Super7 Sergipe Fut7 [Abril]</li>
+                            <li><i class="fas fa-trophy"></i> Copa Nordeste Fut7 [Abril]</li>
+                            <li><i class="fas fa-trophy"></i> Sergipano Fut7 [Junho]</li>
+                            <li><i class="fas fa-trophy"></i> Liga Sergipana Futsal [Junho]</li>
+                            <li><i class="fas fa-trophy"></i> Sergipano 2ª Divisão Fut7 [Setembro]</li>
+                        </ul>
+                    </div>
+                    <div class="calendario-section">
+                        <h4>Próximos Passos</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Fechamento do elenco (10-15 jogadores)</li>
+                            <li><i class="fas fa-check-circle"></i> Definição da comissão técnica</li>
+                            <li><i class="fas fa-check-circle"></i> Estruturação administrativa</li>
+                            <li><i class="fas fa-check-circle"></i> Início dos treinos preparatórios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p style="font-style: italic; text-align: center; color: #666; margin-top: 40px;">Interessados em fazer parte do elenco ou da comissão administrativa do RCA podem entrar em contato através dos canais oficiais do clube.</p>
+        </div>
+
+        <div class="share-section">
+            <h3>Compartilhe esta notícia</h3>
+            <div class="share-buttons">
+                <div class="share-btn facebook"><i class="fab fa-facebook-f"></i></div>
+                <div class="share-btn twitter"><i class="fab fa-twitter"></i></div>
+                <div class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></div>
+                <div class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="related-news">
+        <h2 class="section-title">OUTRAS NOTÍCIAS</h2>
+        <div class="news-grid">
+            <div class="news-card" onclick="window.location.href='news001.html'">
+                <div class="news-img">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-category">DESTAQUE</div>
+                    <h3 class="news-title">RCA conquista título inédito na Taça Redegol Sub-16</h3>
+                </div>
+            </div>
+            <div class="news-card" onclick="window.location.href='historia.html'">
+                <div class="news-img">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-category">HISTÓRIA</div>
+                    <h3 class="news-title">Relembre a trajetória do RCA</h3>
+                </div>
+            </div>
+            <div class="news-card" onclick="window.location.href='noticias.html'">
+                <div class="news-img">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-category">NOTÍCIAS</div>
+                    <h3 class="news-title">Confira todas as notícias do clube</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-img" style="margin-bottom: 25px; width: 100px; height: 100px; font-size: 24px;"><img src="images/escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%"></div>
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://wa.me/+5579988663905"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Início</h3>
+                <ul>
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="../index.html#numeros">Números</a></li>
+                    <li><a href="../index.html#jogos">Jogos</a></li>
+                    <li><a href="../index.html#noticias">Notícias</a></li>
+                    <li><a href="../index.html#historia">História</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="diretoria.html">Diretoria</a></li>
+                    <li><a href="simbolos.html">Símbolos</a></li>
+                    <li><a href="governanca.html">Governança</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>História</h3>
+                <ul>
+                    <li><a href="historia.html">Nossa História</a></li>
+                    <li><a href="titulos.html">Títulos</a></li>
+                    <li><a href="estatisticas.html">Estatísticas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Futebol</h3>
+                <ul>
+                    <li><a href="futsal.html">Futsal</a></li>
+                    <li><a href="fut7.html">Fut7</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Imprensa</h3>
+                <ul>
+                    <li><a href="rcatv.html">RCAtv</a></li>
+                    <li><a href="fotos.html">Fotos</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                    <li><a href="fichas.html">Fichas Técnicas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="faleconosco.html">Fale Conosco</a></li>
+                    <li><a href="https://forms.gle/XnEDGraCpCppNvgv7">Seja RCA</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- PATROCINADORES E PARCEIROS -->
+        <div class="patrocinadores-section">
+            <h3 class="patrocinadores-titulo">PATROCINADORES</h3>
+            <div class="patrocinadores-grid">
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/geocode.png" alt="GeoCODE" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/mf.png" alt="Psi Meire França" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/geracao.png" alt="Geração" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/lagoas.png" alt="Lagoa's Bar" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
+                </a>
+            </div>
+
+            <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
+            <div class="patrocinadores-grid">
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/aljed.png" alt="Aljed" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/cepe.png" alt="CEPE/SE" class="patrocinador-logo">
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.
+            </p>
+            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a
+                    href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+        // Atualiza ano
+        document.getElementById('anoAtual').textContent = new Date().getFullYear();
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        // Scroll suave para o topo ao carregar
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const elementoAno = document.getElementById('anoAtual');
+        const data = new Date();
+        const anoAtual = data.getFullYear();
+        elementoAno.innerHTML = anoAtual;
+    </script>
+</body>
+</html>
