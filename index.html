@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="theme-color" content="#0f1c2e">
     <title>Real Clube Atlético - @oficialrca</title>
-    <link rel="icon" href="escudo.png" type="image/x-icon">
+    <link rel="icon" href="pages/images/escudo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
@@ -544,8 +544,8 @@
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(157px, 1fr));
+            gap: 20px;
             max-width: 1400px;
             margin: 0 auto 40px;
         }
@@ -606,8 +606,7 @@
             margin-bottom: 18px;
         }
 
-        .patrocinadores-grid,
-        .parceiros-grid {
+        .patrocinadores-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -635,7 +634,7 @@
         }
 
         /* logos parceiros menores */
-        .parceiros-grid .patrocinador-logo {
+        .patrocinador-logo {
             max-height: 48px;
             opacity: 0.95;
         }
@@ -659,8 +658,7 @@
 
         /* responsivo */
         @media (max-width: 768px) {
-            .patrocinadores-grid,
-            .parceiros-grid {
+            .patrocinadores-grid {
                 gap: 14px;
             }
             .patrocinadores-grid a:nth-child(1) img,
@@ -670,14 +668,13 @@
             .patrocinadores-grid .patrocinador-logo {
                 max-height: 46px;
             }
-            .parceiros-grid .patrocinador-logo {
+            .patrocinador-logo {
                 max-height: 40px;
             }
         }
 
         @media (max-width: 420px) {
-            .patrocinadores-grid,
-            .parceiros-grid {
+            .patrocinadores-grid {
                 gap: 10px;
             }
             .patrocinadores-section {
@@ -788,13 +785,9 @@
             <div class="social-links">
                 <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
                 <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/oficialrca"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
-                <a href="https://www.twitter.com/oficialrca"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://flickr.com/photos/oficialrca/albums/"><i class="fab fa-flickr"></i></a>
-                <a href="https://whatsapp.com/channel/"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://bit.ly/oficialRCAcastSpotify"><i class="fab fa-spotify"></i></a>
+                <a href="https://wa.me/+5579988663905"><i class="fab fa-whatsapp"></i></a>
             </div>
             <div style="color: var(--branco); font-size: 12px; font-weight: 600;">
                 <i class="fas fa-phone"></i> CONTATO: (79) 9 8866-3905
@@ -802,19 +795,20 @@
         </div>
         <div class="main-header">
             <div class="logo-container" onclick="window.location.href='index.html'">
-                <div class="logo-img"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="logo-img"><img src="pages/images/escudo.png" alt="Escudo RCA" style="width: 75px; height: 75px"></div>
                 <div class="logo-text">REAL CLUBE ATLÉTICO</div>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="clube.html">Clube</a></li>
-                    <li><a href="estatisticas.html">Estatísticas</a></li>
-                    <li><a href="noticias.html">Notícias</a></li>
-                    <li><a href="historia.html">História</a></li>
+                    <li><a href="pages/clube.html">Clube</a></li>
+                    <li><a href="pages/historia.html">História</a></li>
+                    <li><a href="pages/futebol.html">Futebol</a></li>
+                    <li><a href="pages/imprensa.html">Imprensa</a></li>
+                    <li><a href="pages/contato.html">Contato</a></li>
                 </ul>
             </nav>
-            <button class="btn-socio">SEJA RCA</button>
+            <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio" style="text-decoration: none;">SEJA RCA</a>
             <div class="mobile-menu" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
@@ -827,13 +821,13 @@
             <h1>BEM-VINDO À REALEZA</h1>
             <p>Respeito, Comunhão e Ambição. Juntos fazemos história no futsal e futebol sergipano.</p>
             <div class="hero-buttons">
-                <button class="btn-primary"><a href="clube.html">CONHEÇA O CLUBE</a></button>
+                <button class="btn-primary"><a href="pages/clube.html">CONHEÇA O CLUBE</a></button>
                 <a href="#jogos" class="btn-secondary">PRÓXIMOS JOGOS</a>
             </div>
         </div>
     </section>
 
-    <section class="stats-section">
+    <section class="stats-section" id="numeros">
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-number">85</div>
@@ -953,13 +947,13 @@
         <div class="noticias-grid">
             <div class="noticia-card">
                 <div class="noticia-img">
-                    <img src="news001.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="pages/images/news/news001.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="noticia-content">
                     <div class="noticia-categoria">DESTAQUE</div>
                     <h3 class="noticia-titulo">RCA conquista título inédito na Taça Redegol Sub-16 e carimba vaga no Brasileiro</h3>
                     <p class="noticia-texto">Time estreante domina competição em Aracaju e fatura primeiro troféu com campanha impecável</p>
-                    <a href="news001.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    <a href="pages/news/news001.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -971,10 +965,10 @@
                 <h2>NOSSA HISTÓRIA</h2>
                 <p>Fundado em 2019, o Real Clube Atlético nasceu do sonho de jovens apaixonados por esporte que buscavam criar uma instituição que representasse valores de excelência, união e determinação.</p>
                 <p>Com um título conquistado e diversas campanhas memoráveis, o RCA se consolidou como uma força no futsal e futebol 7 de Sergipe.</p>
-                <button class="btn-primary" style="margin-top: 20px;"><a href="historia.html">CONHEÇA MAIS</a></button>
+                <button class="btn-primary" style="margin-top: 20px;"><a href="pages/historia.html">CONHEÇA MAIS</a></button>
             </div>
             <div class="historia-img">
-                <img src="historia.png" alt="História RCA" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                <img src="pages/images/historia.png" alt="História RCA" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
             </div>
         </div>
     </section>
@@ -982,37 +976,64 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <div class="logo-img" style="margin-bottom: 20px; width: 70px; height: 70px; font-size: 24px;"><img src="escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="logo-img" style="margin-bottom: 25px; width: 100px; height: 100px; font-size: 24px;"><img src="pages/images/escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%"></div>
                 <h3>REAL CLUBE ATLÉTICO</h3>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://wa.me/+5579988663905"><i class="fab fa-whatsapp"></i></a>
                 </div>
+            </div>
+            <div class="footer-section">
+                <h3>Início</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#numeros">Números</a></li>
+                    <li><a href="#jogos">Jogos</a></li>
+                    <li><a href="#noticias">Notícias</a></li>
+                    <li><a href="#historia">História</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Clube</h3>
                 <ul>
-                    <li><a href="historia.html">História</a></li>
-                    <li><a href="noticias.html">Notícias</a></li>
-                    <li><a href="estatisticas.html">Estatísticas</a></li>
-                    <li><a href="diretoria.html">Diretoria</a></li>
+                    <li><a href="pages/diretoria.html">Diretoria</a></li>
+                    <li><a href="pages/simbolos.html">Símbolos</a></li>
+                    <li><a href="pages/governanca.html">Governança</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Equipes</h3>
+                <h3>História</h3>
                 <ul>
-                    <li><a href="futsal.html">Futsal</a></li>
-                    <li><a href="fut7.html">Fut7</a></li>
-                    <li><a href="feminino.html">Feminino</a></li>
+                    <li><a href="pages/historia.html">Nossa História</a></li>
+                    <li><a href="pages/titulos.html">Títulos</a></li>
+                    <li><a href="pages/estatisticas.html">Estatísticas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Futebol</h3>
+                <ul>
+                    <li><a href="pages/futsal.html">Futsal</a></li>
+                    <li><a href="pages/fut7.html">Fut7</a></li>
+                    <li><a href="pages/feminino.html">Feminino</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Imprensa</h3>
+                <ul>
+                    <li><a href="pages/rcatv.html">RCAtv</a></li>
+                    <li><a href="pages/fotos.html">Fotos</a></li>
+                    <li><a href="pages/noticias.html">Notícias</a></li>
+                    <li><a href="pages/fichas.html">Fichas Técnicas</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Contato</h3>
                 <ul>
-                    <li><a href="contato.html">Fale Conosco</a></li>
-                    <li><a href="mailto:contato.oficialrca@gmail.com">Imprensa</a></li>
+                    <li><a href="pages/faleconosco.html">Fale Conosco</a></li>
+                    <li><a href="https://forms.gle/XnEDGraCpCppNvgv7">Seja RCA</a></li>
                 </ul>
             </div>
         </div>
@@ -1021,29 +1042,29 @@
             <h3 class="patrocinadores-titulo">PATROCINADORES</h3>
             <div class="patrocinadores-grid">
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/geocode.png" alt="GeoCODE" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/geocode.png" alt="GeoCODE" class="patrocinador-logo">
                 </a>
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/mf.png" alt="Psi Meire França" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/mf.png" alt="Psi Meire França" class="patrocinador-logo">
                 </a>
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/geracao.png" alt="Geração" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/geracao.png" alt="Geração" class="patrocinador-logo">
                 </a>
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/lagoas.png" alt="Lagoa's Bar" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/lagoas.png" alt="Lagoa's Bar" class="patrocinador-logo">
                 </a>
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
                 </a>
             </div>
 
             <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
-            <div class="parceiros-grid">
+            <div class="patrocinadores-grid">
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/aljed.png" alt="Aljed" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/aljed.png" alt="Aljed" class="patrocinador-logo">
                 </a>
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
-                    <img src="patrocinio/cepe.png" alt="CEPE/SE" class="patrocinador-logo">
+                    <img src="pages/images/patrocinio/cepe.png" alt="CEPE/SE" class="patrocinador-logo">
                 </a>
             </div>
         </div>
