@@ -172,6 +172,69 @@
             margin: 0 auto;
         }
 
+        /* DROPDOWN MENU */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--azul);
+            min-width: 220px;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--dourado);
+            color: var(--branco);
+            padding-left: 25px;
+        }
+
+        .dropdown-icon {
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
         /* DIRETORIA SECTION */
         .diretoria-section {
             padding: 80px 5%;
@@ -441,6 +504,22 @@
                 gap: 15px;
             }
 
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                margin-top: 10px;
+                margin-left: 15px;
+                box-shadow: none;
+                border-left: 3px solid var(--dourado);
+            }
+
+            .dropdown-content a {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+
             .page-title {
                 font-size: 36px;
             }
@@ -571,10 +650,51 @@
             <nav>
                 <ul>
                     <li><a href="../index.html">Início</a></li>
-                    <li><a href="clube.html">Clube</a></li>
-                    <li><a href="historia.html">História</a></li>
-                    <li><a href="futebol.html">Futebol</a></li>
-                    <li><a href="imprensa.html">Imprensa</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Clube
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="diretoria.html">Diretoria</a>
+                            <a href="simbolos.html">Símbolos</a>
+                            <a href="governanca.html">Governança</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            História
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="historia.html">Nossa História</a>
+                            <a href="titulos.html">Títulos</a>
+                            <a href="estatisticas.html">Estatísticas</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Elenco
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="futsal.html">Futsal</a>
+                            <a href="fut7.html">Fut7</a>
+                            <a href="feminino.html">Feminino</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Imprensa
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="https://www.youtube.com/@oficialrca">RCAtv</a>
+                            <a href="fotos.html">Fotos</a>
+                            <a href="noticias.html">Notícias</a>
+                            <a href="fichas.html">Fichas Técnicas</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio">SEJA RCA</a>
@@ -583,12 +703,10 @@
             </div>
         </div>
     </header>
-
     <section class="page-header">
         <h1 class="page-title">Diretoria</h1>
         <p class="page-subtitle">Conheça os fundadores e líderes que comandam o Real Clube Atlético</p>
     </section>
-
     <section class="diretoria-section">
         <h2 class="section-title">Diretoria Fundadora</h2>
         <div class="diretoria-grid">
@@ -695,7 +813,6 @@
             </div>
         </div>
     </section>
-
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -736,7 +853,7 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Futebol</h3>
+                <h3>Elenco</h3>
                 <ul>
                     <li><a href="futsal.html">Futsal</a></li>
                     <li><a href="fut7.html">Fut7</a></li>
@@ -772,6 +889,9 @@
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
                     <img src="images/patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
                 </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/sucesso.png" alt="Sucesso" class="patrocinador-logo">
+                </a>
             </div>
 
             <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
@@ -790,7 +910,6 @@
             <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
         </div>
     </footer>
-
     <script>
         function toggleMenu() {
             const nav = document.querySelector('nav');

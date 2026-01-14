@@ -131,6 +131,69 @@
             cursor: pointer;
         }
 
+        /* DROPDOWN MENU */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--azul);
+            min-width: 220px;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--dourado);
+            color: var(--branco);
+            padding-left: 25px;
+        }
+
+        .dropdown-icon {
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
         /* ARTICLE HERO */
         .article-hero {
             margin-top: 120px;
@@ -477,10 +540,7 @@
             transform: scale(1.1);
         }
 
-        .share-btn.facebook { background: #3b5998; }
-        .share-btn.twitter { background: #1da1f2; }
-        .share-btn.whatsapp { background: #25d366; }
-        .share-btn.linkedin { background: #0077b5; }
+        .share-btn.sharenodes { background: #5b6469; }
 
         /* NOTÍCIAS RELACIONADAS */
         .related-news {
@@ -735,6 +795,22 @@
                 gap: 15px;
             }
 
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                margin-top: 10px;
+                margin-left: 15px;
+                box-shadow: none;
+                border-left: 3px solid var(--dourado);
+            }
+
+            .dropdown-content a {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+
             .article-title {
                 font-size: 32px;
             }
@@ -837,13 +913,54 @@
             <nav>
                 <ul>
                     <li><a href="../index.html">Início</a></li>
-                    <li><a href="clube.html">Clube</a></li>
-                    <li><a href="historia.html">História</a></li>
-                    <li><a href="futebol.html">Futebol</a></li>
-                    <li><a href="imprensa.html">Imprensa</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Clube
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="diretoria.html">Diretoria</a>
+                            <a href="simbolos.html">Símbolos</a>
+                            <a href="governanca.html">Governança</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            História
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="historia.html">Nossa História</a>
+                            <a href="titulos.html">Títulos</a>
+                            <a href="estatisticas.html">Estatísticas</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Elenco
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="futsal.html">Futsal</a>
+                            <a href="fut7.html">Fut7</a>
+                            <a href="feminino.html">Feminino</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Imprensa
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="https://www.youtube.com/@oficialrca">RCAtv</a>
+                            <a href="fotos.html">Fotos</a>
+                            <a href="noticias.html">Notícias</a>
+                            <a href="fichas.html">Fichas Técnicas</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
-            <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio" style="text-decoration: none;">SEJA RCA</a>
+            <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio">SEJA RCA</a>
             <div class="mobile-menu" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
@@ -875,7 +992,7 @@
 
     <div class="article-container">
         <div class="article-featured-img">
-            <img src="images/news/news002.JPG" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="images/news/news002.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
 
         <div class="article-content">
@@ -976,10 +1093,7 @@
         <div class="share-section">
             <h3>Compartilhe esta notícia</h3>
             <div class="share-buttons">
-                <div class="share-btn facebook"><i class="fab fa-facebook-f"></i></div>
-                <div class="share-btn twitter"><i class="fab fa-twitter"></i></div>
-                <div class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></div>
-                <div class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></div>
+                <div id="share-btn" class="share-btn sharenodes"><i class="fa-solid fa-share-nodes"></i></div>
             </div>
         </div>
     </div>
@@ -1057,7 +1171,7 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Futebol</h3>
+                <h3>Elenco</h3>
                 <ul>
                     <li><a href="futsal.html">Futsal</a></li>
                     <li><a href="fut7.html">Fut7</a></li>
@@ -1074,7 +1188,7 @@
                 </ul>
             </div>
         </div>
-        <!-- PATROCINADORES E PARCEIROS -->
+        
         <div class="patrocinadores-section">
             <h3 class="patrocinadores-titulo">PATROCINADORES</h3>
             <div class="patrocinadores-grid">
@@ -1093,6 +1207,9 @@
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
                     <img src="images/patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
                 </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/sucesso.png" alt="Sucesso" class="patrocinador-logo">
+                </a>
             </div>
 
             <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
@@ -1105,11 +1222,10 @@
                 </a>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.
-            </p>
-            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a
-                    href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
+            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.</p>
+            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
         </div>
     </footer>
 
@@ -1137,6 +1253,32 @@
         const data = new Date();
         const anoAtual = data.getFullYear();
         elementoAno.innerHTML = anoAtual;
+
+        const shareBtn = document.getElementById('share-btn');
+        
+        shareBtn.addEventListener('click', async () => {
+            // Dados da notícia atual
+            const shareData = {
+                title: 'RCA conquista título inédito na Taça Redegol Sub-16 e carimba vaga no Brasileiro', 
+                text: 'Time estreante domina competição em Aracaju e fatura primeiro troféu com campanha impecável', 
+                url: window.location.href 
+            };
+
+            // Verifica se o navegador suporta o compartilhamento nativo
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    console.log('Compartilhado com sucesso!');
+                } catch (err) {
+                    console.log('Erro ao compartilhar:', err);
+                }
+            } else {
+                // Fallback para Desktop ou navegadores antigos
+                // Aqui você pode apenas copiar o link para a área de transferência
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copiado para a área de transferência!');
+            }
+        });
     </script>
 </body>
 </html>
