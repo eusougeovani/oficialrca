@@ -109,6 +109,69 @@
             color: var(--dourado);
         }
 
+        /* DROPDOWN MENU */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--azul);
+            min-width: 220px;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--dourado);
+            color: var(--branco);
+            padding-left: 25px;
+        }
+
+        .dropdown-icon {
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
         .btn-socio {
             background: var(--dourado);
             color: var(--branco);
@@ -393,6 +456,7 @@
             padding: 80px 5%;
             background: var(--azul);
             color: var(--branco);
+            scroll-margin-top: 130px;
         }
 
         .stats-grid {
@@ -426,6 +490,14 @@
         .noticias-section {
             padding: 80px 5%;
             background: var(--branco);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--azul);
+            margin-bottom: 20px;
         }
 
         .noticias-grid {
@@ -590,7 +662,7 @@
             overflow-wrap: break-word;
         }
 
-        /* PATROCINADORES (adicionado) */
+        /* PATROCINADORES */
         .patrocinadores-section {
             padding: 40px 5%;
             background: transparent;
@@ -617,13 +689,11 @@
             padding: 10px 0 30px;
         }
 
-        /* logos principais (primeiras duas) destacadas */
         .patrocinadores-grid a:nth-child(1) img,
         .patrocinadores-grid a:nth-child(2) img {
             max-height: 80px;
         }
 
-        /* logos padrão patrocinadores */
         .patrocinadores-grid .patrocinador-logo {
             max-height: 54px;
             width: auto;
@@ -633,13 +703,11 @@
             filter: grayscale(0);
         }
 
-        /* logos parceiros menores */
         .patrocinador-logo {
             max-height: 48px;
             opacity: 0.95;
         }
 
-        /* link wrapper */
         .patrocinador-link {
             display: inline-flex;
             align-items: center;
@@ -649,40 +717,10 @@
             border-radius: 6px;
         }
 
-        /* hover */
         .patrocinador-link:hover .patrocinador-logo {
             transform: translateY(-6px) scale(1.04);
             opacity: 1;
             filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
-        }
-
-        /* responsivo */
-        @media (max-width: 768px) {
-            .patrocinadores-grid {
-                gap: 14px;
-            }
-            .patrocinadores-grid a:nth-child(1) img,
-            .patrocinadores-grid a:nth-child(2) img {
-                max-height: 64px;
-            }
-            .patrocinadores-grid .patrocinador-logo {
-                max-height: 46px;
-            }
-            .patrocinador-logo {
-                max-height: 40px;
-            }
-        }
-
-        @media (max-width: 420px) {
-            .patrocinadores-grid {
-                gap: 10px;
-            }
-            .patrocinadores-section {
-                padding: 24px 4%;
-            }
-            .patrocinadores-section .patrocinadores-titulo {
-                font-size: 16px;
-            }
         }
 
         /* RESPONSIVO */
@@ -708,6 +746,22 @@
             nav.active ul {
                 flex-direction: column;
                 gap: 15px;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                margin-top: 10px;
+                margin-left: 15px;
+                box-shadow: none;
+                border-left: 3px solid var(--dourado);
+            }
+
+            .dropdown-content a {
+                font-size: 12px;
+                padding: 10px 15px;
             }
 
             .hero {
@@ -741,6 +795,20 @@
 
             .jogos-container {
                 grid-template-columns: 1fr;
+            }
+
+            .patrocinadores-grid {
+                gap: 14px;
+            }
+            .patrocinadores-grid a:nth-child(1) img,
+            .patrocinadores-grid a:nth-child(2) img {
+                max-height: 64px;
+            }
+            .patrocinadores-grid .patrocinador-logo {
+                max-height: 46px;
+            }
+            .patrocinador-logo {
+                max-height: 40px;
             }
         }
 
@@ -776,6 +844,16 @@
             .stat-number {
                 font-size: 40px;
             }
+
+            .patrocinadores-grid {
+                gap: 10px;
+            }
+            .patrocinadores-section {
+                padding: 24px 4%;
+            }
+            .patrocinadores-section .patrocinadores-titulo {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -801,11 +879,51 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="pages/clube.html">Clube</a></li>
-                    <li><a href="pages/historia.html">História</a></li>
-                    <li><a href="pages/futebol.html">Futebol</a></li>
-                    <li><a href="pages/imprensa.html">Imprensa</a></li>
-                    <li><a href="pages/contato.html">Contato</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Clube
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="pages/diretoria.html">Diretoria</a>
+                            <a href="pages/simbolos.html">Símbolos</a>
+                            <a href="pages/governanca.html">Governança</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            História
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="pages/historia.html">Nossa História</a>
+                            <a href="pages/titulos.html">Títulos</a>
+                            <a href="pages/estatisticas.html">Estatísticas</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Elenco
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="pages/futsal.html">Futsal</a>
+                            <a href="pages/fut7.html">Fut7</a>
+                            <a href="pages/feminino.html">Feminino</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Imprensa
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="https://www.youtube.com/@oficialrca">RCAtv</a>
+                            <a href="pages/fotos.html">Fotos</a>
+                            <a href="pages/noticias.html">Notícias</a>
+                            <a href="pages/fichas.html">Fichas Técnicas</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio" style="text-decoration: none;">SEJA RCA</a>
@@ -814,19 +932,17 @@
             </div>
         </div>
     </header>
-
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">⚽ TEMPORADA 2026</div>
             <h1>BEM-VINDO À REALEZA</h1>
-            <p>Respeito, Comunhão e Ambição. Juntos fazemos história no futsal e futebol sergipano.</p>
+            <p>Respeito, Comunhão e Ambição. Juntos fazemos história no futsal e fut7 sergipano.</p>
             <div class="hero-buttons">
                 <button class="btn-primary"><a href="pages/clube.html">CONHEÇA O CLUBE</a></button>
                 <a href="#jogos" class="btn-secondary">PRÓXIMOS JOGOS</a>
             </div>
         </div>
     </section>
-
     <section class="stats-section" id="numeros">
         <div class="stats-grid">
             <div class="stat-item">
@@ -847,10 +963,9 @@
             </div>
         </div>
     </section>
-
     <section class="proximos-jogos" id="jogos">
         <div class="section-header">
-            <h2 class="section-title">CALENDÁRIO DE JOGOS</h2>
+            <br><br><br><h2 class="section-title">CALENDÁRIO DE JOGOS</h2>
         </div>
         <br><br>
         <div class="jogos-container">
@@ -939,26 +1054,14 @@
             </div>
         </div>
     </section>
-
     <section class="noticias-section" id="noticias">
         <div class="section-header">
-            <h2 class="section-title">ÚLTIMAS NOTÍCIAS</h2>
+            <br><br><br><h2 class="section-title">ÚLTIMAS NOTÍCIAS</h2>
         </div>
         <div class="noticias-grid">
             <div class="noticia-card">
                 <div class="noticia-img">
-                    <img src="pages/images/news/news001.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="noticia-content">
-                    <div class="noticia-categoria">DESTAQUE</div>
-                    <h3 class="noticia-titulo">RCA conquista título inédito na Taça Redegol Sub-16 e carimba vaga no Brasileiro</h3>
-                    <p class="noticia-texto">Time estreante domina competição em Aracaju e fatura primeiro troféu com campanha impecável</p>
-                    <a href="pages/news001.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="noticia-card">
-                <div class="noticia-img">
-                    <img src="pages/images/news/news002.JPG" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="pages/images/news/news002.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="noticia-content">
                     <div class="noticia-categoria">BASTIDORES</div>
@@ -967,9 +1070,19 @@
                     <a href="pages/news002.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
+            <div class="noticia-card">
+                <div class="noticia-img">
+                    <img src="pages/images/news/news001.jpg" alt="Notícia RCA" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="noticia-content">
+                    <div class="noticia-categoria">FUT7</div>
+                    <h3 class="noticia-titulo">RCA conquista título inédito na Taça Redegol Sub-16 e carimba vaga no Brasileiro</h3>
+                    <p class="noticia-texto">Time estreante domina competição em Aracaju e fatura primeiro troféu com campanha impecável</p>
+                    <a href="pages/news001.html" class="noticia-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
         </div>
     </section>
-
     <section class="historia-section" id="historia">
         <div class="historia-content">
             <div class="historia-text">
@@ -983,7 +1096,6 @@
             </div>
         </div>
     </section>
-
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -1024,7 +1136,7 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Futebol</h3>
+                <h3>Elenco</h3>
                 <ul>
                     <li><a href="pages/futsal.html">Futsal</a></li>
                     <li><a href="pages/fut7.html">Fut7</a></li>
@@ -1038,13 +1150,6 @@
                     <li><a href="pages/fotos.html">Fotos</a></li>
                     <li><a href="pages/noticias.html">Notícias</a></li>
                     <li><a href="pages/fichas.html">Fichas Técnicas</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contato</h3>
-                <ul>
-                    <li><a href="pages/faleconosco.html">Fale Conosco</a></li>
-                    <li><a href="https://forms.gle/XnEDGraCpCppNvgv7">Seja RCA</a></li>
                 </ul>
             </div>
         </div>
@@ -1067,6 +1172,9 @@
                 <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
                     <img src="pages/images/patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
                 </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="pages/images/patrocinio/sucesso.png" alt="Sucesso" class="patrocinador-logo">
+                </a>
             </div>
 
             <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
@@ -1086,7 +1194,6 @@
                     href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
         </div>
     </footer>
-
     <script>
         function toggleDetalhes(elemento) {
             const detalhes = elemento.querySelector('.jogo-detalhes');
@@ -1098,7 +1205,6 @@
             nav.classList.toggle('active');
         }
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1109,7 +1215,6 @@
             });
         });
 
-        // Animações ao scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1137,5 +1242,4 @@
         elementoAno.innerHTML = anoAtual;
     </script>
 </body>
-
 </html>
