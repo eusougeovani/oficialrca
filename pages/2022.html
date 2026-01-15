@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0f1c2e">
+    <title>Especial 2022 | O Primeiro Título - @oficialrca</title>
+    <link rel="icon" href="images/escudo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #0f1c2e;
+            --branco: #fdfdfd;
+            --dourado: #ff6b00;
+            --cinza: #f5f5f5;
+            --vintage: #e8dcc4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--vintage);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--azul);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: var(--dourado);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--branco);
+            margin: 0 8px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            color: var(--branco);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        .btn-socio {
+            background: var(--dourado);
+            color: var(--branco);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-socio:hover {
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--branco);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            margin-top: 120px;
+            padding: 80px 5% 60px;
+            background: linear-gradient(135deg, var(--azul) 0%, #1a2b3f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,107,0,0.1)"/></svg>');
+            background-size: 300px;
+            opacity: 0.3;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--branco);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: rgba(253,253,253,0.8);
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* DROPDOWN MENU */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--azul);
+            min-width: 220px;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--dourado);
+            color: var(--branco);
+            padding-left: 25px;
+        }
+
+        .dropdown-icon {
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 114px;
+            height: 100vh;
+            background: linear-gradient(rgba(15, 28, 46, 0.85), rgba(15, 28, 46, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%230f1c2e" width="1200" height="800"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            width: 150px;
+            height: 150px;
+            background: var(--dourado);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 0 50px rgba(255, 107, 0, 0.5);
+            animation: pulse 3s infinite;
+            border: 5px solid var(--branco);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-badge i {
+            font-size: 70px;
+            color: var(--branco);
+        }
+
+        .hero-year {
+            font-size: 120px;
+            font-weight: 900;
+            color: var(--dourado);
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+            font-family: 'Impact', sans-serif;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            color: var(--branco);
+            font-weight: 700;
+            max-width: 900px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: rgba(253, 253, 253, 0.9);
+            max-width: 700px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--branco);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        .scroll-indicator i {
+            display: block;
+            margin-top: 10px;
+            font-size: 24px;
+        }
+
+        /* INTRO SECTION */
+        .intro-section {
+            padding: 100px 5%;
+            background: var(--branco);
+            text-align: center;
+        }
+
+        .section-label {
+            color: var(--dourado);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .intro-title {
+            font-size: 48px;
+            color: var(--azul);
+            font-weight: 700;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro-text {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: justify;
+        }
+
+        .intro-quote {
+            font-size: 28px;
+            font-style: italic;
+            color: var(--azul);
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            border-left: 5px solid var(--dourado);
+            background: var(--cinza);
+        }
+
+        /* TIMELINE */
+        .timeline-section {
+            padding: 100px 5%;
+            background: var(--azul);
+        }
+
+        .timeline-title {
+            text-align: center;
+            font-size: 48px;
+            color: var(--branco);
+            margin-bottom: 80px;
+            font-weight: 700;
+        }
+
+        .timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--dourado);
+        }
+
+        .timeline-item {
+            margin-bottom: 60px;
+            position: relative;
+            width: 50%;
+            padding: 0 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--dourado);
+            border: 4px solid var(--azul);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: var(--branco);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: var(--dourado);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-match {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 15px;
+        }
+
+        .timeline-score {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--dourado);
+            margin: 20px 0;
+        }
+
+        .timeline-details {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* HEROES SECTION */
+        .heroes-section {
+            padding: 100px 5%;
+            background: var(--cinza);
+        }
+
+        .heroes-title {
+            text-align: center;
+            font-size: 48px;
+            color: var(--azul);
+            margin-bottom: 80px;
+            font-weight: 700;
+        }
+
+        .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-card {
+            background: var(--branco);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-top: 5px solid var(--dourado);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--dourado);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .hero-icon i {
+            font-size: 40px;
+            color: var(--branco);
+        }
+
+        .hero-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 10px;
+        }
+
+        .hero-role {
+            font-size: 14px;
+            color: var(--dourado);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero-stats {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .hero-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--dourado);
+            margin: 15px 0 10px;
+        }
+
+        /* STATS SECTION */
+        .stats-section {
+            padding: 100px 5%;
+            background: var(--azul);
+            text-align: center;
+        }
+
+        .stats-title {
+            font-size: 48px;
+            color: var(--branco);
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(253, 253, 253, 0.1);
+            padding: 40px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--dourado);
+            line-height: 1;
+            margin-bottom: 15px;
+            font-family: 'Impact', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--branco);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* FINAL SECTION */
+        .final-section {
+            padding: 100px 5%;
+            background: var(--branco);
+        }
+
+        .final-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .final-title {
+            font-size: 48px;
+            color: var(--azul);
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .final-box {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 60px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .final-label {
+            font-size: 14px;
+            color: var(--dourado);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .final-score {
+            font-size: 64px;
+            font-weight: 900;
+            text-align: center;
+            color: var(--dourado);
+            margin: 30px 0;
+        }
+
+        .final-detail {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .final-detail strong {
+            color: var(--dourado);
+        }
+
+        .shootout-box {
+            background: var(--cinza);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+            color: var(--azul);
+        }
+
+        .shootout-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--azul);
+        }
+
+        .shootout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .shootout-team h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--dourado);
+        }
+
+        .shootout-list {
+            list-style: none;
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .shootout-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .shootout-list .check {
+            color: #22c55e;
+            font-weight: 900;
+        }
+
+        .shootout-list .cross {
+            color: #ef4444;
+            font-weight: 900;
+        }
+
+        /* LEGACY SECTION */
+        .legacy-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--azul) 0%, #1a2b3f 100%);
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .legacy-title {
+            font-size: 48px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .legacy-text {
+            font-size: 22px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-style: italic;
+        }
+
+        .legacy-badge {
+            width: 120px;
+            height: 120px;
+            background: var(--dourado);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 50px auto;
+            border: 5px solid var(--branco);
+        }
+
+        .legacy-badge i {
+            font-size: 60px;
+            color: var(--branco);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--azul);
+            color: var(--branco);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(157px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--dourado);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(253,253,253,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(253,253,253,0.1);
+            color: rgba(253,253,253,0.6);
+        }
+        
+        .footer-bottom a { 
+            color: var(--dourado); 
+            text-decoration: none;
+            word-wrap: break-word;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* PATROCINADORES */
+        .patrocinadores-section {
+            padding: 40px 5%;
+            background: transparent;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .patrocinadores-section .patrocinadores-titulo {
+            color: var(--branco);
+            font-size: 18px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .patrocinadores-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0 30px;
+        }
+
+        .patrocinadores-grid a:nth-child(1) img,
+        .patrocinadores-grid a:nth-child(2) img {
+            max-height: 80px;
+        }
+
+        .patrocinadores-grid .patrocinador-logo {
+            max-height: 54px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.95;
+            transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+            filter: grayscale(0);
+        }
+
+        .patrocinador-logo {
+            max-height: 48px;
+            opacity: 0.95;
+        }
+
+        .patrocinador-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            background: transparent;
+            border-radius: 6px;
+        }
+
+        .patrocinador-link:hover .patrocinador-logo {
+            transform: translateY(-6px) scale(1.04);
+            opacity: 1;
+            filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--azul);
+                padding: 20px;
+            }
+
+            nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                margin-top: 10px;
+                margin-left: 15px;
+                box-shadow: none;
+                border-left: 3px solid var(--dourado);
+            }
+
+            .dropdown-content a {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .page-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-year {
+                font-size: 80px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 60px;
+            }
+
+            .timeline-item::before {
+                left: 11px !important;
+            }
+
+            .intro-title, .timeline-title, .heroes-title, .stats-title, .final-title, .legacy-title {
+                font-size: 36px;
+            }
+
+            .final-score {
+                font-size: 48px;
+            }
+
+            .shootout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .patrocinadores-grid {
+                gap: 14px;
+            }
+            .patrocinadores-grid a:nth-child(1) img,
+            .patrocinadores-grid a:nth-child(2) img {
+                max-height: 64px;
+            }
+            .patrocinadores-grid .patrocinador-logo {
+                max-height: 46px;
+            }
+            .patrocinador-logo {
+                max-height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-year {
+                font-size: 60px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .stat-number {
+                font-size: 56px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .patrocinadores-grid {
+                gap: 10px;
+            }
+            .patrocinadores-section {
+                padding: 24px 4%;
+            }
+            .patrocinadores-section .patrocinadores-titulo {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                <a href="https://wa.me/+5579988663905"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div style="color: var(--branco); font-size: 12px; font-weight: 600;">
+                <i class="fas fa-phone"></i> CONTATO: (79) 9 8866-3905
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="logo-container" onclick="window.location.href='../index.html'">
+                <div class="logo-img"><img src="images/escudo.png" alt="Escudo RCA" style="width: 75px; height: 75px"></div>
+                <div class="logo-text">REAL CLUBE ATLÉTICO</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Clube
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="diretoria.html">Diretoria</a>
+                            <a href="simbolos.html">Símbolos</a>
+                            <a href="governanca.html">Governança</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            História
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="historia.html">Nossa História</a>
+                            <a href="titulos.html">Campanhas</a>
+                            <a href="estatisticas.html">Estatísticas</a>
+                            <a href="2022.html">Redegol 2022</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Elenco
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="futsal.html">Futsal</a>
+                            <a href="fut7.html">Fut7</a>
+                            <a href="feminino.html">Feminino</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">
+                            Imprensa
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="https://www.youtube.com/@oficialrca">RCAtv</a>
+                            <a href="fotos.html">Fotos</a>
+                            <a href="noticias.html">Notícias</a>
+                            <a href="fichas.html">Fichas Técnicas</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <a href="https://forms.gle/XnEDGraCpCppNvgv7" class="btn-socio">SEJA RCA</a>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">
+            <i class="fas fa-trophy"></i>
+        </div>
+        <div class="hero-year">2022</div>
+        <h1 class="hero-title">A CONQUISTA QUE FUNDOU UMA HISTÓRIA</h1>
+        <p class="hero-subtitle">Taça Redegol Sub-16: O Primeiro Título do RCA</p>
+        <div class="scroll-indicator">
+            Role para descobrir
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    <!-- INTRO -->
+    <section class="intro-section">
+        <div class="section-label">O Começo de Tudo</div>
+        <h2 class="intro-title">23 de outubro de 2022: O dia em que tudo mudou</h2>
+        <p class="intro-text">
+            Em sua estreia absoluta em competições oficiais, o Real Clube Atlético escreveu a primeira página de sua história gloriosa. No Oratório Complexo Esportivo, em Aracaju, um grupo de jovens talentosos, comandados por Felipe Dias e Geovani Santos, conquistou algo que transcende troféus: conquistou o direito de sonhar.
+        </p>
+        <p class="intro-text">
+            A Taça Redegol Sub-16 não foi apenas um título. Foi a certidão de nascimento de um clube que nasceu para vencer. Foi a prova de que trabalho sério, dedicação e paixão podem transformar sonhos em realidade. Foi o dia em que o RCA anunciou ao futebol sergipano: viemos para ficar.
+        </p>
+        <div class="intro-quote">
+            "Este título representa muito mais do que um troféu. É a consolidação de um projeto que acredita na formação de atletas e cidadãos."
+            <div style="margin-top: 15px; font-size: 18px; font-style: normal; color: var(--dourado);">
+                — Geovani Santos, Fundador e Auxiliar Técnico
+            </div>
+        </div>
+    </section>
+    <!-- TIMELINE -->
+    <section class="timeline-section">
+        <h2 class="timeline-title">A JORNADA RUMO À GLÓRIA</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">1ª RODADA • 22 OUT 2022 • 10:00</div>
+                    <div class="timeline-match">RCA vs A2 Academy Soccer</div>
+                    <div class="timeline-score">4 × 2</div>
+                    <div class="timeline-details">
+                        <strong>Gols RCA:</strong> Joaquim de França, Roberto César, Ian Feitosa, João Victor Souza<br>
+                        A primeira vitória. O primeiro gol. O começo da caminhada vitoriosa.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2ª RODADA • 22 OUT 2022 • 15:40</div>
+                    <div class="timeline-match">Botelho Sport Program vs RCA</div>
+                    <div class="timeline-score">1 × 3</div>
+                    <div class="timeline-details">
+                        <strong>Gols RCA:</strong> Gabriel Costa (2), Roberto César<br>
+                        Gabriel Costa brilha e o RCA domina seu futuro rival da final.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">3ª RODADA • 23 OUT 2022 • 08:00</div>
+                    <div class="timeline-match">Escolinha do Dragão vs RCA</div>
+                    <div class="timeline-score">0 × 2</div>
+                    <div class="timeline-details">
+                        <strong>Resultado:</strong> W.O.<br>
+                        Classificação garantida para as semifinais com campanha perfeita.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">SEMIFINAL • 23 OUT 2022 • 13:30</div>
+                    <div class="timeline-match">RCA vs AJU Sants AFC</div>
+                    <div class="timeline-score">3 × 0</div>
+                    <div class="timeline-details">
+                        <strong>Gols RCA:</strong> Ian Feitosa, Gabriel Costa (2)<br>
+                        Atuação dominante. A final já tinha um protagonista definido.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">FINAL • 23 OUT 2022 • 15:00</div>
+                    <div class="timeline-match">Botelho Sport Program vs RCA</div>
+                    <div class="timeline-score">4 (2) × (3) 4</div>
+                    <div class="timeline-details">
+                        <strong>Gols RCA:</strong> Roberto César, Lucas Silveira, Ian Feitosa, Gabriel Costa<br>
+                        <strong>Shoot-out:</strong> 3-2 para o RCA<br>
+                        <span style="color: var(--dourado); font-weight: 700;">O DIA DA GLÓRIA ETERNA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- HEROES -->
+    <section class="heroes-section">
+        <h2 class="heroes-title">OS HERÓIS DE 2022</h2>
+        <div class="heroes-grid">
+            <div class="hero-card">
+                <div class="hero-icon"><i class="fas fa-star"></i></div>
+                <div class="hero-name">Gabriel Costa Figueiroa</div>
+                <div class="hero-role">MVP da Competição</div>
+                <div class="hero-number">5</div>
+                <div class="hero-stats">Gols marcados<br>Artilheiro do time<br>Craque da final</div>
+            </div>
+
+            <div class="hero-card">
+                <div class="hero-icon"><i class="fas fa-futbol"></i></div>
+                <div class="hero-name">Ian Feitosa Bessa</div>
+                <div class="hero-role">Artilheiro</div>
+                <div class="hero-number">3</div>
+                <div class="hero-stats">Gols marcados<br>Decisivo na semifinal<br>Gol na final</div>
+            </div>
+
+            <div class="hero-card">
+                <div class="hero-icon"><i class="fas fa-hand-paper"></i></div>
+                <div class="hero-name">Jenisson Ribeiro Neto</div>
+                <div class="hero-role">Melhor Goleiro</div>
+                <div class="hero-number">★</div>
+                <div class="hero-stats">Muralha do RCA<br>Decisivo no shoot-out<br>Segurança absoluta</div>
+            </div>
+
+            <div class="hero-card">
+                <div class="hero-icon"><i class="fas fa-chess-king"></i></div>
+                <div class="hero-name">Joaquim de França</div>
+                <div class="hero-role">Capitão</div>
+                <div class="hero-number">10</div>
+                <div class="hero-stats">Liderança em campo<br>Principal assistente<br>Gol e decisão no shoot-out</div>
+            </div>
+
+            <div class="hero-card">
+                <div class="hero-icon"><i class="fas fa-trophy"></i></div>
+                <div class="hero-name">Roberto César</div>
+                <div class="hero-role">Camisa 11</div>
+                <div class="hero-number">3</div>
+                <div class="hero-stats">Gols marcados<br>Presente em momentos decisivos</div>
+            </div>
+
+            <div class="hero-card">
+                <div class="hero-icon"><i class="fas fa-clipboard"></i></div>
+                <div class="hero-name">Felipe Dias & Geovani Santos</div>
+                <div class="hero-role">Comissão Técnica</div>
+                <div class="hero-number">★</div>
+                <div class="hero-stats">Arquitetos do título<br>Visão estratégica<br>Formadores de campeões</div>
+            </div>
+        </div>
+    </section>
+    <!-- STATS -->
+    <section class="stats-section">
+        <h2 class="stats-title">NÚMEROS DA CONQUISTA</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Jogos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Vitórias</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">16</div>
+                <div class="stat-label">Gols Marcados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Gols Sofridos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Aproveitamento</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1°</div>
+                <div class="stat-label">Lugar</div>
+            </div>
+        </div>
+    </section>
+    <!-- FINAL -->
+    <section class="final-section">
+        <h2 class="final-title">A FINAL HISTÓRICA</h2>
+        <div class="final-content">
+            <div class="final-box">
+                <div class="final-label">Grande Final • Oratório Complexo Esportivo</div>
+                <div class="final-score">Botelho 4 (2) × (3) 4 RCA</div>
+                
+                <div class="final-detail">
+                    <strong>Local:</strong> Oratório Complexo Esportivo - Campo 1, Aracaju
+                </div>
+                <div class="final-detail">
+                    <strong>Data:</strong> 23 de outubro de 2022, 15h
+                </div>
+                <div class="final-detail">
+                    <strong>Gols Botelho:</strong> Felipe Porto Monte (3), Kercio Santos
+                </div>
+                <div class="final-detail">
+                    <strong>Gols RCA:</strong> Roberto César, Lucas Silveira, Ian Feitosa, Gabriel Costa
+                </div>
+                <div class="final-detail">
+                    <strong>Cartão Amarelo:</strong> Carlos Eduardo de Moraes Fonseca (Botelho)
+                </div>
+
+                <div class="shootout-box">
+                    <div class="shootout-title">DECISÃO NOS SHOOT-OUTS</div>
+                    <div class="shootout-grid">
+                        <div class="shootout-team">
+                            <h4>RCA - 3 conversões</h4>
+                            <ul class="shootout-list">
+                                <li><span class="check">✓</span> João Lucas Santos</li>
+                                <li><span class="check">✓</span> Joaquim de França</li>
+                                <li><span class="cross">✗</span> Gabriel Costa</li>
+                                <li><span class="check">✓</span> Ian Feitosa</li>
+                            </ul>
+                        </div>
+                        <div class="shootout-team">
+                            <h4>Botelho - 2 conversões</h4>
+                            <ul class="shootout-list">
+                                <li><span class="cross">✗</span> Kercio Santos</li>
+                                <li><span class="check">✓</span> Felipe Porto</li>
+                                <li><span class="check">✓</span> João Gabriel</li>
+                                <li><span class="cross">✗</span> Luan Pires</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--cinza); padding: 40px; border-radius: 15px; margin-top: 40px;">
+                <h3 style="color: var(--azul); font-size: 24px; text-align: center; margin-bottom: 25px; font-weight: 700;">ELENCO CAMPEÃO</h3>
+                <p style="font-size: 18px; line-height: 1.8; color: #555; text-align: center;">
+                    <strong style="color: var(--dourado);">Goleiros:</strong> Jenisson Ribeiro, João Vitor Melo<br><br>
+                    <strong style="color: var(--dourado);">Fixos:</strong> Gabriel Smith, José Paulino, João Lucas, Erick Júnior<br><br>
+                    <strong style="color: var(--dourado);">Alas:</strong> Roberto César, Bernardo Cesar, Gabriel Costa<br><br>
+                    <strong style="color: var(--dourado);">Meias:</strong> Joaquim de França (C), Gustavo Batista<br><br>
+                    <strong style="color: var(--dourado);">Pivôs:</strong> Willer Andrade, Ian Feitosa, João Victor Souza, Lucas Silveira<br><br>
+                    <strong style="color: var(--dourado);">Comissão Técnica:</strong> Felipe Luiz Dias Martins (Treinador) e Geovani Santos (Auxiliar Técnico)
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- LEGACY -->
+    <section class="legacy-section">
+        <h2 class="legacy-title">O LEGADO DE 2022</h2>
+        <p class="legacy-text">
+            O título da Taça Redegol Sub-16 de 2022 não foi apenas uma conquista esportiva. Foi o marco zero de uma história que começou com coragem, determinação e um sonho: criar um clube vencedor em Sergipe.
+        </p>
+        <p class="legacy-text">
+            Aqueles jovens que vestiram a camisa do RCA pela primeira vez naquele outubro de 2022 não sabiam, mas estavam escrevendo história. Estavam fundando uma tradição. Estavam provando que é possível, sim, começar do zero e chegar ao topo.
+        </p>
+        <div class="legacy-badge">
+            <i class="fas fa-crown"></i>
+        </div>
+        <p class="legacy-text" style="font-size: 28px; font-weight: 700; color: var(--dourado);">
+            23 de outubro de 2022<br>
+            O dia em que nasceu uma dinastia
+        </p>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-img" style="margin-bottom: 25px; width: 100px; height: 100px; font-size: 24px;"><img src="images/escudo.png" alt="Escudo RCA" style="width: 100%; height: 100%"></div>
+                <h3>REAL CLUBE ATLÉTICO</h3>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@oficialrca"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/oficialrca/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@oficialrca"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.threads.com/@oficialrca"><i class="fab fa-threads"></i></a>
+                    <a href="https://wa.me/+5579988663905"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Início</h3>
+                <ul>
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="../index.html#numeros">Números</a></li>
+                    <li><a href="../index.html#jogos">Jogos</a></li>
+                    <li><a href="../index.html#noticias">Notícias</a></li>
+                    <li><a href="../index.html#historia">História</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Clube</h3>
+                <ul>
+                    <li><a href="diretoria.html">Diretoria</a></li>
+                    <li><a href="simbolos.html">Símbolos</a></li>
+                    <li><a href="governanca.html">Governança</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>História</h3>
+                <ul>
+                    <li><a href="historia.html">Nossa História</a></li>
+                    <li><a href="titulos.html">Campanhas</a></li>
+                    <li><a href="estatisticas.html">Estatísticas</a></li>
+                    <li><a href="2022.html">Redegol 2022</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Elenco</h3>
+                <ul>
+                    <li><a href="futsal.html">Futsal</a></li>
+                    <li><a href="fut7.html">Fut7</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Imprensa</h3>
+                <ul>
+                    <li><a href="rcatv.html">RCAtv</a></li>
+                    <li><a href="fotos.html">Fotos</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                    <li><a href="fichas.html">Fichas Técnicas</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="patrocinadores-section">
+            <h3 class="patrocinadores-titulo">PATROCINADORES</h3>
+            <div class="patrocinadores-grid">
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/geocode.png" alt="GeoCODE" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/mf.png" alt="Psi Meire França" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/geracao.png" alt="Geração" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/lagoas.png" alt="Lagoa's Bar" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/sergisat.png" alt="Sergisat" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/sucesso.png" alt="Sucesso" class="patrocinador-logo">
+                </a>
+            </div>
+
+            <h3 class="patrocinadores-titulo" style="margin-top: 40px;">PARCEIROS</h3>
+            <div class="patrocinadores-grid">
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/aljed.png" alt="Aljed" class="patrocinador-logo">
+                </a>
+                <a href="#" class="patrocinador-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/patrocinio/cepe.png" alt="CEPE/SE" class="patrocinador-logo">
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; <span id="anoAtual"></span> RCA - Real Clube Atlético. Todos os Direitos Reservados.</p>
+            <p>Desenvolvido com <i class="fa-solid fa-mug-hot"></i> por <a href="https://eusougeovani.vercel.app/">GeoCODE Programmer</a></p>
+        </div>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item, .hero-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Ano atual
+        const elementoAno = document.getElementById('anoAtual');
+        const data = new Date();
+        const anoAtual = data.getFullYear();
+        elementoAno.innerHTML = anoAtual;
+    </script>
+</body>
+</html>
