@@ -521,30 +521,29 @@
 
         /* PATROCINADORES (adicionado) */
         .patrocinadores-section {
-            padding: 40px 5%;
-            background: transparent;
-            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .patrocinadores-titulo {
             text-align: center;
-        }
-
-        .patrocinadores-section .patrocinadores-titulo {
-            color: var(--branco);
-            font-size: 18px;
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--dourado);
+            font-weight: 700;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 800;
-            margin-bottom: 18px;
         }
 
-        .patrocinadores-grid,
-        .parceiros-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        .patrocinadores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
             align-items: center;
-            gap: 22px;
+            justify-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 10px 0 30px;
         }
 
         /* logos principais (primeiras duas) destacadas */
@@ -571,19 +570,28 @@
 
         /* link wrapper */
         .patrocinador-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6px;
-            background: transparent;
-            border-radius: 6px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: all 0.3s;
+            width: 100%;
+            height: 100px;
         }
 
         /* hover */
-        .patrocinador-link:hover .patrocinador-logo {
-            transform: translateY(-6px) scale(1.04);
-            opacity: 1;
-            filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+        .patrocinador-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
+
+        .patrocinador-logo {
+            max-width: 120px;
+            max-height: 60px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
         }
 
         /* responsivo */
