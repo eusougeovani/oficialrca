@@ -182,7 +182,7 @@
   };
 
   R.comps2026 = el => {
-    el.innerHTML = D.competicoes2026.map(c => `<div class="comp reveal"><div class="comp__m">${esc(c.mes)}</div><div><b>${esc(c.nome)}</b><small>${esc(c.mod)} · previsto para 2026</small></div></div>`).join('');
+    el.innerHTML = D.competicoes2026.map(c => `<div class="comp reveal"><div class="comp__m">${esc(c.mes)}</div><div><b>${esc(c.nome)}</b><small>${esc(c.mod)} · ${esc(c.status || 'anunciado em jan/2026')}</small></div></div>`).join('');
   };
 
   const newsCard = n => `<article class="card news-card reveal"><a href="${pg('noticia')}?id=${n.id}" aria-label="${esc(n.titulo)}">

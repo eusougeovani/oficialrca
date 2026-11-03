@@ -21,6 +21,7 @@ Cabeçalho, rodapé, menu e patrocinadores são gerados por `app.js`: **editou u
 
 - **Jogos:** adicione em `jogos` →
   `{ campeonato:'Super7 Sergipe', data:'2026-04-12', hora:'16h', casa:'RCA', fora:'Adversário', local:'Ginásio X', placar:'3 × 1' }` (omita `placar` para jogo futuro).
+- **Calendário 2026:** em `competicoes2026` cada item aceita `status` (ex.: `"confirmado"`, `"encerrado"`) para trocar o texto padrão “anunciado em jan/2026”.
 - **Elenco:** preencha `elenco.futsal | fut7 | feminino` →
   `{ num:10, nome:'Fulano', pos:'Ala', gols:0, jogos:0, capitao:false }`.
 - **Notícias:** adicione o item em `noticias` e o texto (HTML) em `articles.js` com a mesma chave `id`. Foto em `pages/images/news/`.
