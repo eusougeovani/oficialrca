@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendário de Jogos | RCA Real Clube Atlético</title>
+<meta name="description" content="Próximos jogos, competições previstas em 2026 e campanha histórica do Real Clube Atlético.">
+<meta name="theme-color" content="#0b1c3c">
+<link rel="canonical" href="https://oficialrca.vercel.app/pages/calendario.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Real Clube Atlético">
+<meta property="og:title" content="Calendário de Jogos | RCA Real Clube Atlético">
+<meta property="og:description" content="Próximos jogos, competições previstas em 2026 e campanha histórica do Real Clube Atlético.">
+<meta property="og:url" content="https://oficialrca.vercel.app/pages/calendario.html">
+<meta property="og:image" content="https://oficialrca.vercel.app/pages/images/mascote.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" href="images/escudo.png" type="image/png">
+<link rel="apple-touch-icon" href="images/escudo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-root="../" data-page="calendario">
+<section class="page-hero"><div class="container">
+  <ul class="crumbs" aria-label="Você está em"><li><a href="../index.html">Início</a></li><li>Calendário</li></ul>
+  <span class="eyebrow">Temporada 2026</span>
+  <h1>Calendário de jogos</h1>
+  <p class="lead">Datas, horários e locais das partidas do RCA.</p>
+</div></section>
+<main id="main">
+<section class="section"><div class="container">
+  <div class="section-head"><div><span class="eyebrow">Partidas</span><h2>Jogos</h2></div></div>
+  <div class="grid grid--2" data-render="matches"></div>
+  <div class="section-head" style="margin-top:64px"><div><span class="eyebrow">2026</span><h2>Competições previstas</h2></div></div>
+  <div class="comp-list" data-render="comps2026" style="max-width:720px"></div>
+</div></section>
+</main>
+<section class="section section--tight"><div class="container">
+  <div class="cta reveal"><div><h2>Faça parte da Realeza</h2><p>Atleta, torcedor, voluntário ou patrocinador: tem lugar para você no RCA.</p></div>
+  <div class="cta__btns"><a class="btn btn--navy" href="seja-rca.html">Seja RCA</a><a class="btn btn--ghost" style="border-color:rgba(11,28,60,.4);color:var(--navy)" href="patrocinadores.html">Seja patrocinador</a></div></div>
+</div></section>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

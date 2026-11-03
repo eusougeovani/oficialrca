@@ -1,15 +1,15 @@
 {
   "name": "Real Clube Atlético",
-  "short_name": "RCA | @oficialrca",
-  "start_url": "index.html",
+  "short_name": "RCA",
+  "description": "Site oficial do Real Clube Atlético: futsal, fut7 e feminino em Aracaju, Sergipe.",
+  "lang": "pt-BR",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0f1c2e",
-  "theme_color": "#0f1c2e",
+  "background_color": "#0b1c3c",
+  "theme_color": "#0b1c3c",
   "icons": [
-    {
-      "src": "pages/images/escudo.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "pages/images/escudo.png", "sizes": "500x500", "type": "image/png", "purpose": "any" },
+    { "src": "pages/images/escudo.png", "sizes": "500x500", "type": "image/png", "purpose": "maskable" }
   ]
 }
