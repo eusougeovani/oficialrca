@@ -30,6 +30,20 @@ Cabeçalho, rodapé, menu e patrocinadores são gerados por `app.js`: **editou u
 - **Patrocinadores:** logo em `pages/images/patrocinio/` + item em `patrocinadores`/`parceiros`.
 - **Fotos:** itens em `galeria`.
 
+## Novos módulos (2027)
+
+Tudo é configurado em `assets/js/data.js`.
+
+- **Calendário 2027:** `calendario2027` → `{ nome:'Sergipano Fut7', mes:'Abril', mod:'Fut7', status:'confirmado' }`. Vazio = aviso “calendário em definição”.
+- **Classificação:** `classificacao` → `{ competicao:'Sergipano Fut7 2027', atualizado:'2027-05-10', tabela:[{time:'RCA',v:3,e:1,d:0,gp:10,gc:3}], artilheiros:[{nome:'Fulano',time:'RCA',gols:5}] }`. Pontos, jogos e saldo são calculados sozinhos, e a linha do RCA fica destacada.
+- **Loja (pedido pelo WhatsApp):** `loja.produtos` →
+  `{ id:'camisa-titular', nome:'Camisa Titular', preco:149.9, categoria:'Uniformes', descricao:'Laranja oficial', tamanhos:['P','M','G','GG'], imagem:'images/loja/camisa.jpg', esgotado:false }`.
+  `id` precisa ser único; `preco: null` mostra “Consulte”; `tamanhos` é opcional. O carrinho fica salvo no navegador do cliente e o pedido sai como mensagem pronta no WhatsApp do clube.
+- **Cotas de patrocínio:** `cotas` → nome, `valor` (texto livre, vazio = “Sob consulta”), `periodo`, `destaque` e `beneficios`.
+- **Perfil de jogador:** gerado automaticamente a partir de `jogadores` (`jogador.html?id=nome`). Campos opcionais por jogador: `foto` (ex.: `images/jogadores/joaquim.jpg`), `bio` e `num` (camisa).
+- **Lista de transmissão:** em `clube.canalWhatsApp` coloque o link do Canal/Comunidade do WhatsApp. Vazio = o botão abre uma conversa com o clube pedindo a inclusão.
+- **Plataformas de transmissão:** `plataformas` (Instagram, TikTok, YouTube).
+
 Ao publicar mudanças em CSS/JS, aumente `VERSION` em `sw.js`.
 
 ## Rodar localmente

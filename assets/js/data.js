@@ -1,4 +1,4 @@
-/* Dados do site RCA — edite aqui para atualizar jogos, notícias, elenco e documentos. */
+/* Dados do site RCA — edite aqui para atualizar jogos, notícias, elenco, loja, cotas e documentos. */
 window.RCA_DATA = {
  "clube": {
   "nome": "Real Clube Atlético",
@@ -15,7 +15,9 @@ window.RCA_DATA = {
    "youtube": "https://www.youtube.com/@oficialrca",
    "threads": "https://www.threads.com/@oficialrca"
   },
-  "formSocio": "https://forms.gle/XnEDGraCpCppNvgv7"
+  "formSocio": "https://forms.gle/XnEDGraCpCppNvgv7",
+  "temporada": 2027,
+  "canalWhatsApp": ""
  },
  "numeros": {
   "jogos": 85,
@@ -25,33 +27,6 @@ window.RCA_DATA = {
   "aproveitamento": "41,5%"
  },
  "jogos": [],
- "competicoes2026": [
-  {
-   "nome": "Super7 Sergipe Fut7",
-   "mes": "Abril",
-   "mod": "Fut7"
-  },
-  {
-   "nome": "Copa Nordeste Fut7",
-   "mes": "Abril",
-   "mod": "Fut7"
-  },
-  {
-   "nome": "Sergipano Fut7",
-   "mes": "Junho",
-   "mod": "Fut7"
-  },
-  {
-   "nome": "Liga Sergipana Futsal",
-   "mes": "Junho",
-   "mod": "Futsal"
-  },
-  {
-   "nome": "Sergipano 2ª Divisão Fut7",
-   "mes": "Setembro",
-   "mod": "Fut7"
-  }
- ],
  "noticias": [
   {
    "id": "retorno-2026",
@@ -104,8 +79,13 @@ window.RCA_DATA = {
   },
   {
    "ano": "2026",
+   "titulo": "Planejamento do retorno",
+   "texto": "O clube anuncia a volta ao esporte com foco na equipe adulta e reorganiza sua estrutura administrativa. O retorno às competições fica para 2027."
+  },
+  {
+   "ano": "2027",
    "titulo": "O retorno do gigante azul",
-   "texto": "Retorno com foco na equipe adulta, calendário de competições em Fut7 e Futsal e nova estrutura administrativa."
+   "texto": "Meta: voltar às quadras e aos campos com elenco adulto, nova estrutura administrativa e calendário de competições a definir."
   }
  ],
  "diretoria": {
@@ -826,6 +806,77 @@ window.RCA_DATA = {
      "arquivo": ""
     }
    ]
+  }
+ ],
+ "calendario2027": [],
+ "classificacao": [],
+ "loja": {
+  "produtos": []
+ },
+ "cotas": [
+  {
+   "id": "bronze",
+   "nome": "Bronze",
+   "valor": "",
+   "periodo": "por temporada",
+   "destaque": false,
+   "beneficios": [
+    "Logo na página de patrocinadores",
+    "Agradecimento em publicação nas redes sociais",
+    "Certificado de apoiador"
+   ]
+  },
+  {
+   "id": "prata",
+   "nome": "Prata",
+   "valor": "",
+   "periodo": "por temporada",
+   "destaque": true,
+   "beneficios": [
+    "Tudo da cota Bronze",
+    "Logo no rodapé de todas as páginas do site",
+    "Menções mensais nas redes sociais",
+    "Banner em dias de jogo, quando houver"
+   ]
+  },
+  {
+   "id": "ouro",
+   "nome": "Ouro",
+   "valor": "",
+   "periodo": "por temporada",
+   "destaque": false,
+   "beneficios": [
+    "Tudo da cota Prata",
+    "Destaque na página inicial do site",
+    "Espaço no uniforme (posição a combinar)",
+    "Conteúdo exclusivo da marca nas redes e nas transmissões"
+   ]
+  }
+ ],
+ "plataformas": [
+  {
+   "id": "instagram",
+   "nome": "Instagram",
+   "handle": "@oficialrca",
+   "url": "https://www.instagram.com/oficialrca/",
+   "icon": "fa-brands fa-instagram",
+   "texto": "Transmissões ao vivo, stories e novidades do clube."
+  },
+  {
+   "id": "tiktok",
+   "nome": "TikTok",
+   "handle": "@oficialrca",
+   "url": "https://www.tiktok.com/@oficialrca",
+   "icon": "fa-brands fa-tiktok",
+   "texto": "Transmissões ao vivo e vídeos curtos do clube."
+  },
+  {
+   "id": "youtube",
+   "nome": "YouTube · RCAtv",
+   "handle": "@oficialrca",
+   "url": "https://www.youtube.com/@oficialrca",
+   "icon": "fa-brands fa-youtube",
+   "texto": "RCAtv: as transmissões do clube."
   }
  ]
 };

@@ -1,6 +1,7 @@
 /* Corpo das notícias. A chave é o "id" cadastrado em data.js. */
 window.RCA_ARTICLES = {
   'retorno-2026': `
+    <blockquote><strong>Atualização:</strong> o retorno às competições, anunciado para 2026, foi adiado para 2027. O texto abaixo é o comunicado original de janeiro de 2026.</blockquote>
     <p>Após dois anos afastado das competições, o Real Clube Atlético oficializou seu retorno ao esporte sergipano. Em comunicado à família RCA, o presidente e fundador Geovani Santos anunciou o início da preparação para a temporada adulta masculina de 2026, com competições já previstas para abril, junho e setembro.</p>
     <blockquote>“Nossa temporada finalmente deu pontapé inicial, e com isso, nosso primeiro passo é com a parte administrativa.” — Geovani Santos, presidente do RCA</blockquote>
     <div class="facts"><div class="fact"><b>10–15</b><span>Jogadores no elenco</span></div><div class="fact"><b>3–5</b><span>Competições em 2026</span></div><div class="fact"><b>2–4x</b><span>Treinos por mês</span></div></div>
