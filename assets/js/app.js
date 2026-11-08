@@ -447,7 +447,7 @@
 
   /* loja com carrinho → WhatsApp */
   R.shop = el => {
-    const prods = (D.loja && D.loja.produtos) || [];
+    const prods = ((D.loja && D.loja.produtos) || []).filter(p => p.ativo !== false);
     if (!prods.length) {
       el.innerHTML = `<div class="empty"><i class="fa-solid fa-shirt"></i><h3>Loja oficial em breve</h3><p>Uniformes e acessórios do RCA chegam por aqui. Entre na lista de transmissão abaixo para ser avisado quando os pedidos abrirem.</p></div>`;
       return;

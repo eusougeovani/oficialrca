@@ -811,7 +811,19 @@ window.RCA_DATA = {
  "calendario2027": [],
  "classificacao": [],
  "loja": {
-  "produtos": []
+  "_ajuda": "Para cada produto: preencha 'preco' (número, ex.: 149.9), coloque a foto em pages/images/loja/ e escreva o nome do arquivo em 'imagem', e troque 'ativo' para true. Produtos com ativo:false não aparecem no site. 'esgotado':true mostra o produto sem permitir pedido.",
+  "produtos": [
+   { "id": "camisa-titular", "ativo": false, "categoria": "Uniformes", "nome": "Camisa Titular", "descricao": "Uniforme oficial de jogo", "preco": null, "tamanhos": ["P", "M", "G", "GG", "XG"], "imagem": "images/loja/camisa-titular.jpg", "esgotado": false },
+   { "id": "camisa-reserva", "ativo": false, "categoria": "Uniformes", "nome": "Camisa Reserva", "descricao": "Segundo uniforme oficial", "preco": null, "tamanhos": ["P", "M", "G", "GG", "XG"], "imagem": "images/loja/camisa-reserva.jpg", "esgotado": false },
+   { "id": "camisa-goleiro", "ativo": false, "categoria": "Uniformes", "nome": "Camisa de Goleiro", "descricao": "Uniforme oficial de goleiro", "preco": null, "tamanhos": ["P", "M", "G", "GG"], "imagem": "images/loja/camisa-goleiro.jpg", "esgotado": false },
+   { "id": "camisa-infantil", "ativo": false, "categoria": "Uniformes", "nome": "Camisa Infantil", "descricao": "Versão infantil do uniforme titular", "preco": null, "tamanhos": ["4", "6", "8", "10", "12", "14"], "imagem": "images/loja/camisa-infantil.jpg", "esgotado": false },
+   { "id": "short-oficial", "ativo": false, "categoria": "Uniformes", "nome": "Short Oficial", "descricao": "Short do uniforme de jogo", "preco": null, "tamanhos": ["P", "M", "G", "GG"], "imagem": "images/loja/short-oficial.jpg", "esgotado": false },
+   { "id": "camisa-treino", "ativo": false, "categoria": "Treino", "nome": "Camisa de Treino", "descricao": "Para treinar com o manto do clube", "preco": null, "tamanhos": ["P", "M", "G", "GG"], "imagem": "images/loja/camisa-treino.jpg", "esgotado": false },
+   { "id": "agasalho", "ativo": false, "categoria": "Treino", "nome": "Jaqueta / Agasalho", "descricao": "Agasalho oficial do RCA", "preco": null, "tamanhos": ["P", "M", "G", "GG"], "imagem": "images/loja/agasalho.jpg", "esgotado": false },
+   { "id": "bone", "ativo": false, "categoria": "Acessórios", "nome": "Boné RCA", "descricao": "Boné com o escudo do clube", "preco": null, "tamanhos": [], "imagem": "images/loja/bone.jpg", "esgotado": false },
+   { "id": "bandeira", "ativo": false, "categoria": "Torcedor", "nome": "Bandeira RCA", "descricao": "Para levar à arquibancada", "preco": null, "tamanhos": [], "imagem": "images/loja/bandeira.jpg", "esgotado": false },
+   { "id": "caneca", "ativo": false, "categoria": "Torcedor", "nome": "Caneca RCA", "descricao": "Caneca com o escudo do clube", "preco": null, "tamanhos": [], "imagem": "images/loja/caneca.jpg", "esgotado": false }
+  ]
  },
  "cotas": [
   {

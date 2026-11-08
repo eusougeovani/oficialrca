@@ -1,0 +1,2 @@
+Coloque aqui as fotos dos produtos da loja (ex.: camisa-titular.jpg).
+Nomes devem bater com o campo "imagem" em assets/js/data.js.
